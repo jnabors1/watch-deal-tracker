@@ -1,0 +1,52 @@
+name: Update Watch Prices
+
+on:
+  schedule:
+    # Run every day at 8:00 AM Central Time during standard time
+    - cron: "0 14 * * *"
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Update tracker timestamp
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+
+          with open("data.json", "r") as f:
+              data = json.load(f)
+
+          data["updated"] = datetime.now(timezone.utc).strftime(
+              "%Y-%m-%d %H:%M UTC"
+          )
+
+          with open("data.json", "w") as f:
+              json.dump(data, f, indent=2)
+
+          PY
+
+      - name: Commit updated data
+        run: |
+          git config user.name "Watch Deal Tracker"
+          git config user.email "actions@github.com"
+
+          git add data.json
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update watch price data"
+            git push
+          fi
