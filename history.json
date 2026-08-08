@@ -1,0 +1,20 @@
+{
+  "vaer_c5_recon_solar": [
+    {
+      "date": "2026-08-08",
+      "best": 0,
+      "lowest": 0,
+      "typical": 0,
+      "count": 0
+    }
+  ],
+  "hamilton_khaki_field_auto_38": [
+    {
+      "date": "2026-08-08",
+      "best": 635.0,
+      "lowest": 635.0,
+      "typical": 732.16,
+      "count": 8
+    }
+  ]
+}
