@@ -17,7 +17,8 @@ HEADERS = {
 
 def is_exact_target(title, watch_config):
     """
-    Check if listing title matches the watch's required terms and excludes unwanted terms.
+    Check if listing title matches the watch's required terms.
+    Model (reference number) is optional – helps but doesn't block.
     """
     title_lower = title.lower()
 
@@ -26,18 +27,19 @@ def is_exact_target(title, watch_config):
         if term in title_lower:
             return False
 
-    # Must contain brand and model (if specified)
+    # Must contain brand
     if watch_config.get("brand", "").lower() not in title_lower:
         return False
-
-    if watch_config.get("model"):
-        if not re.search(rf"\b{re.escape(watch_config['model'])}\b", title_lower, re.IGNORECASE):
-            return False
 
     # Must contain all required_terms
     for term in watch_config.get("required_terms", []):
         if term not in title_lower:
             return False
+
+    # Model (reference number) is optional – if it exists, it helps,
+    # but we don't reject listings without it.
+    # Many sellers don't include the reference number in the title.
+    # We'll still check it if present, but it won't block the listing.
 
     return True
 
