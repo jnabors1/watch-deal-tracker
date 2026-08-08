@@ -258,7 +258,7 @@ def update_dashboard(listings):
     }
 
     with open(
-        "data.json",
+        "ebay_data.json",
         "w",
         encoding="utf-8"
     ) as file:
