@@ -2,7 +2,6 @@ name: Update Watch Prices
 
 on:
   schedule:
-    # Run every day at 8:00 AM Central Time during standard time
     - cron: "0 14 * * *"
 
   workflow_dispatch:
@@ -19,7 +18,20 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v5
 
-      - name: Update tracker timestamp
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Check WatchPatrol
+        run: |
+          python watchpatrol_tracker.py
+
+      - name: Update dashboard timestamp
         run: |
           python - <<'PY'
           import json
@@ -42,7 +54,7 @@ jobs:
           git config user.name "Watch Deal Tracker"
           git config user.email "actions@github.com"
 
-          git add data.json
+          git add data.json watchpatrol.json
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
