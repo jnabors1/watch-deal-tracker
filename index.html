@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vaer C5 Recon Deal Tracker</title>
+  <title>Watch Deal Tracker</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f7fa; padding: 16px; color: #1a202c; }
@@ -17,8 +17,9 @@
     .best-price .price { font-size: 2rem; font-weight: 700; color: #2b6cb0; }
     .best-price .source { font-size: 0.9rem; color: #4a5568; }
     .best-price .badge { background: #ebf8ff; color: #2b6cb0; padding: 2px 10px; border-radius: 20px; font-size: 0.8rem; }
-    .stats { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0; font-size: 0.9rem; }
-    .stats span { background: #f7fafc; padding: 4px 12px; border-radius: 20px; }
+    .stats { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0; font-size: 0.9rem; }
+    .stats span { background: #f7fafc; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+    .stats .history-low { background: #e6fffa; color: #234e52; }
     .target-info { font-size: 0.85rem; color: #4a5568; margin: 8px 0; }
     .target-info .good { color: #38a169; }
     .target-info .excellent { color: #2b6cb0; }
@@ -46,8 +47,17 @@
 
   <script>
     (async function() {
-      const res = await fetch('data.json');
-      const data = await res.json();
+      // Fetch both current data and history
+      const [dataRes, historyRes] = await Promise.all([
+        fetch('data.json'),
+        fetch('history.json')
+      ]);
+
+      const data = await dataRes.json();
+      let history = {};
+      if (historyRes.ok) {
+        history = await historyRes.json();
+      }
 
       const container = document.getElementById('content');
       const updatedEl = document.getElementById('updated');
@@ -64,13 +74,12 @@
         const toggleKey = `toggle_${watchId}`;
         let showOnlyRecon = localStorage.getItem(toggleKey) === 'true';
 
-        // Determine if Recon Solar is a variant we care about (based on required_terms)
+        // Determine if Recon Solar is a variant we care about
         const isReconWatch = watch.name.toLowerCase().includes('recon');
 
         // Filter listings if toggle is on
         let filteredListings = listings;
         if (showOnlyRecon && isReconWatch) {
-          // Show only listings with "recon" and "solar" in title
           filteredListings = listings.filter(l => {
             const title = l.title.toLowerCase();
             return title.includes('recon') && title.includes('solar');
@@ -85,12 +94,15 @@
         const target = watch.target_price || 200;
         const excellent = watch.excellent_price || 180;
 
+        // Historical data
+        const allTimeLow = watch.all_time_low || 0;
+        const thirtyDayLow = watch.thirty_day_low || 0;
+
         let priceDisplay = `<span class="price">$${bestPrice.toFixed(2)}</span>`;
         if (bestPrice === 0) {
           priceDisplay = `<span class="price" style="color:#a0aec0;">No listings</span>`;
         }
 
-        // Determine if best price is good/excellent
         let badge = '';
         if (bestPrice > 0 && bestPrice <= excellent) {
           badge = '<span class="badge" style="background:#c6f6d5; color:#276749;">Excellent!</span>';
@@ -110,8 +122,10 @@
               ${badge}
             </div>
             <div class="stats">
-              <span>Lowest: $${lowest.toFixed(2)}</span>
+              <span>Current Low: $${lowest.toFixed(2)}</span>
               <span>Typical: $${typical.toFixed(2)}</span>
+              <span class="history-low">🏆 All-time Low: $${allTimeLow.toFixed(2)}</span>
+              <span class="history-low">📅 30-Day Low: $${thirtyDayLow.toFixed(2)}</span>
             </div>
             <div class="target-info">
               Target: <span class="good">$${target}</span> &nbsp;|&nbsp; Excellent: <span class="excellent">$${excellent}</span>
@@ -153,7 +167,6 @@
           const current = localStorage.getItem(key) === 'true';
           const newVal = !current;
           localStorage.setItem(key, newVal ? 'true' : 'false');
-          // Reload to apply filter
           location.reload();
         });
       });
