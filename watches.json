@@ -17,14 +17,15 @@
         "\"Vaer C5\"",
         "\"C5 Recon\""
       ],
-      "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/vaer/c5-field/"
+      "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/vaer/c5-field/",
+      "exact_filter_terms": ["recon", "solar"]
     },
     {
       "id": "hamilton_khaki_field_auto_38",
       "name": "Hamilton Khaki Field Auto Automatic 38mm H70455533",
       "brand": "Hamilton",
       "model": "H70455533",
-      "required_terms": ["khaki", "field", "auto"],
+      "required_terms": ["khaki", "field", "auto", "38mm"],
       "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
       "msrp": 795,
       "target_price": 575,
@@ -37,7 +38,8 @@
         "\"Hamilton Khaki Field Auto 38mm\""
       ],
       "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/hamilton/khaki-field-auto/",
-      "watchmaxx_url": "https://www.watchmaxx.com/hamilton-watch-h70455553"
+      "watchmaxx_url": "https://www.watchmaxx.com/hamilton-watch-h70455553",
+      "exact_filter_terms": ["38mm", "auto"]
     }
   ]
 }
