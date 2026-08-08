@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08 21:00 UTC",
+  "updated": "2026-08-08 21:19 UTC",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -13,6 +13,86 @@
       "typical_price": 0,
       "listings": [],
       "sources": []
+    },
+    "hamilton_khaki_field_auto_38": {
+      "name": "Hamilton Khaki Field Auto Automatic 38mm H70455533",
+      "msrp": 795,
+      "target_price": 500,
+      "excellent_price": 400,
+      "best_price": 635.0,
+      "best_source": "eBay",
+      "best_link": "https://www.ebay.com/itm/137540949188?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item20061454c4:g:zc4AAOSwy11fqsUf",
+      "lowest_price": 635.0,
+      "typical_price": 732.16,
+      "listings": [
+        {
+          "source": "eBay",
+          "price": 635.0,
+          "condition": "New with box and papers",
+          "title": "NEW HAMILTON KHAKI FIELD AUTOMATIC H-10 MOVEMENT BROWN LEATHER 38MM H70455533",
+          "link": "https://www.ebay.com/itm/137540949188?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item20061454c4:g:zc4AAOSwy11fqsUf",
+          "item_id": "v1|137540949188|0"
+        },
+        {
+          "source": "eBay",
+          "price": 635.97,
+          "condition": "New with box and papers",
+          "title": "Hamilton Khaki Field Men's Brown Leather Swiss Automatic Watch - H70455533",
+          "link": "https://www.ebay.com/itm/800455724922?_skw=%22H70455533%22&hash=itemba5ee10f7a:g:i~kAAeSw65BqcOpN",
+          "item_id": "v1|800455724922|0"
+        },
+        {
+          "source": "eBay",
+          "price": 680.0,
+          "condition": "New with box and papers",
+          "title": "New HAMILTON Khaki Field 38MM Automatic BRN Leather Men's Watch H70455533",
+          "link": "https://www.ebay.com/itm/186364370903?_skw=%22H70455533%22&hash=item2b642e9fd7:g:FN0AAOSwjClmA5Xm",
+          "item_id": "v1|186364370903|0"
+        },
+        {
+          "source": "eBay",
+          "price": 721.08,
+          "condition": "New with box and papers",
+          "title": "Hamilton Khaki Field Auto - H70455533",
+          "link": "https://www.ebay.com/itm/146021506060?_skw=%22H70455533%22&hash=item21ff8f5c0c:g:UzoAAOSwXohmnmg0",
+          "item_id": "v1|146021506060|0"
+        },
+        {
+          "source": "eBay",
+          "price": 785.1,
+          "condition": "Pre-owned - Excellent",
+          "title": "Unused HAMILTON Khaki Field H70455533 Black Automatic Stainless Men Watch in Box",
+          "link": "https://www.ebay.com/itm/316738787251?_skw=%22H70455533%22&hash=item49bf1a57b3:g:2zMAAeSwsdtoEgw9",
+          "item_id": "v1|316738787251|0"
+        },
+        {
+          "source": "eBay",
+          "price": 786.1,
+          "condition": "New with box and papers",
+          "title": "HAMILTON Khaki Field H70455533 Black Automatic Stainless Men's Watch New in Box",
+          "link": "https://www.ebay.com/itm/316712272023?_skw=%22H70455533%22&hash=item49bd85c097:g:cBcAAeSwb25o9bz7",
+          "item_id": "v1|316712272023|0"
+        },
+        {
+          "source": "eBay",
+          "price": 794.0,
+          "condition": "New with box and papers",
+          "title": "Hamilton Khaki Field Auto Black Dial Leather Men's Watch H70455533",
+          "link": "https://www.ebay.com/itm/384368727027?_skw=%22H70455533%22&hash=item597e2953f3:g:yYwAAOSwn8tjWD8Z",
+          "item_id": "v1|384368727027|0"
+        },
+        {
+          "source": "eBay",
+          "price": 820.0,
+          "condition": "New with box and papers",
+          "title": "Hamilton Khaki Field Auto Black Dial Brown Leather 38 mm Watch - H70455533",
+          "link": "https://www.ebay.com/itm/178288570857?_skw=%22H70455533%22&hash=item2982d3b1e9:g:BPYAAeSwxLxqS95S",
+          "item_id": "v1|178288570857|0"
+        }
+      ],
+      "sources": [
+        "eBay"
+      ]
     }
   }
 }
