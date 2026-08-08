@@ -34,6 +34,13 @@
       "lowest": 0,
       "typical": 0,
       "count": 0
+    },
+    {
+      "date": "2026-08-08",
+      "best": 0,
+      "lowest": 0,
+      "typical": 0,
+      "count": 0
     }
   ],
   "hamilton_khaki_field_auto_38": [
@@ -71,6 +78,13 @@
       "lowest": 320.0,
       "typical": 662.23,
       "count": 14
+    },
+    {
+      "date": "2026-08-08",
+      "best": 450.0,
+      "lowest": 450.0,
+      "typical": 629.86,
+      "count": 7
     }
   ]
 }
