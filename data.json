@@ -1,28 +1,12 @@
 {
-  "best_price": 189,
-  "best_source": "eBay \u2014 Excellent Condition",
-  "best_link": "https://www.ebay.com/sch/i.html?_nkw=vaer+c5+recon+field+solar",
-  "lowest_price": 160,
-  "typical_price": 215,
-  "updated": "2026-08-08 03:48 UTC",
-  "listings": [
-    {
-      "source": "eBay",
-      "price": 189,
-      "condition": "Excellent condition \u2014 example listing",
-      "link": "https://www.ebay.com/sch/i.html?_nkw=vaer+c5+recon+field+solar"
-    },
-    {
-      "source": "WatchPatrol",
-      "price": 205,
-      "condition": "Used \u2014 example listing",
-      "link": "https://www.watchpatrol.net/discover/brands/vaer/c5-field/"
-    },
-    {
-      "source": "Vaer",
-      "price": 349,
-      "condition": "New \u2014 retail",
-      "link": "https://www.vaerwatches.com/products/c5-recon-field-solar-40mm-usa"
-    }
+  "best_price": 0,
+  "best_source": "No listings found",
+  "best_link": "#",
+  "lowest_price": 0,
+  "typical_price": 0,
+  "updated": "2026-08-08 20:14 UTC",
+  "listings": [],
+  "sources": [
+    "WatchPatrol"
   ]
 }
