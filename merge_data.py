@@ -122,7 +122,9 @@ def main():
             "listings": all_listings,
             "all_time_low": all_time_low,
             "thirty_day_low": thirty_day_low,
-            "sources": []
+            "sources": [],
+            # --- NEW: Pass filter terms to the dashboard ---
+            "exact_filter_terms": watch_meta.get("exact_filter_terms", [])
         }
 
         sources = []
