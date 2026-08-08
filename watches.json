@@ -27,8 +27,8 @@
       "required_terms": ["khaki", "field", "auto"],
       "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
       "msrp": 795,
-      "target_price": 500,
-      "excellent_price": 400,
+      "target_price": 575,
+      "excellent_price": 450,
       "search_terms": [
         "\"Hamilton Khaki Field Auto\"",
         "\"Khaki Field Auto\"",
@@ -36,7 +36,8 @@
         "\"Hamilton Khaki Field Automatic\"",
         "\"Hamilton Khaki Field Auto 38mm\""
       ],
-      "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/hamilton/khaki-field-auto/"
+      "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/hamilton/khaki-field-auto/",
+      "watchmaxx_url": "https://www.watchmaxx.com/hamilton-watch-h70455553"
     }
   ]
 }
