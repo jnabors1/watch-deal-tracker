@@ -45,6 +45,11 @@ jobs:
           EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
         continue-on-error: true
 
+      - name: Check WatchMaxx
+        run: |
+          python watchmaxx_tracker.py
+        continue-on-error: true
+
       - name: Merge data sources
         run: |
           python merge_data.py
@@ -56,6 +61,7 @@ jobs:
 
           git add data.json watchpatrol.json || true
           git add ebay_data.json 2>/dev/null || true
+          git add watchmaxx_data.json 2>/dev/null || true
           git add history.json 2>/dev/null || true
 
           if git diff --cached --quiet; then
