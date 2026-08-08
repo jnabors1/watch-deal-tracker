@@ -115,9 +115,6 @@ def fetch_listings():
         if not title:
             continue
 
-        # === DEBUG: print every title found on the page ===
-        print(f"DEBUG TITLE: {title}")
-
         # We only care about listings containing
         # the exact target model terms.
         if not is_exact_target(title):
