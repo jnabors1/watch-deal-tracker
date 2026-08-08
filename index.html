@@ -1,349 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vaer C5 Recon Deal Tracker</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      background: #f4f5f7;
-      color: #1f2937;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    .header {
-      background: #111827;
-      color: white;
-      padding: 24px;
-      border-radius: 16px;
-      margin-bottom: 16px;
-    }
-
-    .header h1 {
-      margin: 0 0 6px;
-      font-size: 25px;
-    }
-
-    .header p {
-      margin: 0;
-      color: #cbd5e1;
-      font-size: 14px;
-    }
-
-    .best {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-    }
-
-    .best-label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: #6b7280;
-      font-weight: 700;
-    }
-
-    .best-price {
-      font-size: 48px;
-      font-weight: 800;
-      margin: 4px 0;
-    }
-
-    .best-source {
-      color: #4b5563;
-      margin-bottom: 18px;
-    }
-
-    .buy-button {
-      display: inline-block;
-      background: #16a34a;
-      color: white;
-      text-decoration: none;
-      padding: 13px 20px;
-      border-radius: 10px;
-      font-weight: 700;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .stat {
-      background: white;
-      border-radius: 14px;
-      padding: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.05);
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: #6b7280;
-      margin-bottom: 5px;
-    }
-
-    .stat-value {
-      font-size: 22px;
-      font-weight: 750;
-    }
-
-    .section {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.05);
-    }
-
-    .section h2 {
-      margin-top: 0;
-      font-size: 19px;
-    }
-
-    .deal {
-      border-top: 1px solid #e5e7eb;
-      padding: 16px 0;
-    }
-
-    .deal:first-of-type {
-      border-top: none;
-    }
-
-    .deal-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-    }
-
-    .deal-source {
-      font-weight: 700;
-    }
-
-    .deal-price {
-      font-size: 22px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .deal-details {
-      color: #6b7280;
-      font-size: 14px;
-      margin: 5px 0 10px;
-    }
-
-    .deal-link {
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .target {
-      background: #ecfdf5;
-      border: 1px solid #bbf7d0;
-      border-radius: 12px;
-      padding: 14px;
-      margin-top: 14px;
-      color: #166534;
-    }
-
-    .updated {
-      text-align: center;
-      color: #6b7280;
-      font-size: 12px;
-      padding: 10px;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 12px;
-      }
-
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .best-price {
-        font-size: 42px;
-      }
-
-      .deal-top {
-        align-items: flex-start;
-      }
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f7fa; padding: 16px; color: #1a202c; }
+    .container { max-width: 600px; margin: 0 auto; }
+    h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 4px; }
+    .sub { color: #4a5568; font-size: 0.9rem; margin-bottom: 16px; }
+    .watch-card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .watch-title { font-size: 1.2rem; font-weight: 600; }
+    .watch-meta { font-size: 0.85rem; color: #4a5568; margin-bottom: 12px; }
+    .best-price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    .best-price .price { font-size: 2rem; font-weight: 700; color: #2b6cb0; }
+    .best-price .source { font-size: 0.9rem; color: #4a5568; }
+    .best-price .badge { background: #ebf8ff; color: #2b6cb0; padding: 2px 10px; border-radius: 20px; font-size: 0.8rem; }
+    .stats { display: flex; flex-wrap: wrap; gap: 16px; margin: 12px 0; font-size: 0.9rem; }
+    .stats span { background: #f7fafc; padding: 4px 12px; border-radius: 20px; }
+    .target-info { font-size: 0.85rem; color: #4a5568; margin: 8px 0; }
+    .target-info .good { color: #38a169; }
+    .target-info .excellent { color: #2b6cb0; }
+    .toggle-bar { display: flex; align-items: center; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
+    .toggle-btn { background: #edf2f7; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; }
+    .toggle-btn.active { background: #2b6cb0; color: white; }
+    .listing { border-top: 1px solid #e2e8f0; padding: 12px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .listing .info { flex: 1; }
+    .listing .title { font-size: 0.95rem; }
+    .listing .price { font-weight: 600; font-size: 1.1rem; }
+    .listing .source-tag { font-size: 0.75rem; background: #e2e8f0; padding: 2px 8px; border-radius: 12px; }
+    .listing a { color: #2b6cb0; text-decoration: none; font-size: 0.9rem; }
+    .listing a:hover { text-decoration: underline; }
+    .empty { color: #718096; font-style: italic; padding: 12px 0; }
+    .updated { font-size: 0.8rem; color: #718096; margin-top: 8px; }
   </style>
 </head>
-
 <body>
-
-<div class="container">
-
-  <div class="header">
-    <h1>Vaer C5 Recon Deal Tracker</h1>
-    <p>Automatic price monitoring for the C5 Recon Field Solar</p>
+  <div class="container">
+    <h1>🔍 Watch Deal Tracker</h1>
+    <p class="sub">Automatic price monitoring for your target watches</p>
+    <div id="content"></div>
+    <div id="updated" class="updated"></div>
   </div>
 
-  <div class="best">
-    <div class="best-label">Best Current Price</div>
-    <div class="best-price" id="bestPrice">—</div>
-    <div class="best-source" id="bestSource">Waiting for price data...</div>
-    <a id="bestLink" class="buy-button" href="#" target="_blank">
-      View Best Deal
-    </a>
+  <script>
+    (async function() {
+      const res = await fetch('data.json');
+      const data = await res.json();
 
-    <div class="target">
-      <strong>🎯 My Buy Target:</strong>
-      $200 or less<br>
-      <small>
-        $180 or less = excellent deal
-      </small>
-    </div>
-  </div>
+      const container = document.getElementById('content');
+      const updatedEl = document.getElementById('updated');
+      updatedEl.textContent = `Last updated: ${data.updated || 'unknown'}`;
 
-  <div class="stats">
+      if (!data.watches || Object.keys(data.watches).length === 0) {
+        container.innerHTML = '<p>No watches configured.</p>';
+        return;
+      }
 
-    <div class="stat">
-      <div class="stat-label">Lowest Found</div>
-      <div class="stat-value" id="lowest">—</div>
-    </div>
+      let html = '';
+      for (const [watchId, watch] of Object.entries(data.watches)) {
+        const listings = watch.listings || [];
+        const toggleKey = `toggle_${watchId}`;
+        let showOnlyRecon = localStorage.getItem(toggleKey) === 'true';
 
-    <div class="stat">
-      <div class="stat-label">Typical Price</div>
-      <div class="stat-value" id="typical">—</div>
-    </div>
+        // Determine if Recon Solar is a variant we care about (based on required_terms)
+        const isReconWatch = watch.name.toLowerCase().includes('recon');
 
-    <div class="stat">
-      <div class="stat-label">MSRP</div>
-      <div class="stat-value">$349</div>
-    </div>
+        // Filter listings if toggle is on
+        let filteredListings = listings;
+        if (showOnlyRecon && isReconWatch) {
+          // Show only listings with "recon" and "solar" in title
+          filteredListings = listings.filter(l => {
+            const title = l.title.toLowerCase();
+            return title.includes('recon') && title.includes('solar');
+          });
+        }
 
-  </div>
+        // Build price display
+        const bestPrice = watch.best_price || 0;
+        const lowest = watch.lowest_price || 0;
+        const typical = watch.typical_price || 0;
+        const msrp = watch.msrp || 349;
+        const target = watch.target_price || 200;
+        const excellent = watch.excellent_price || 180;
 
-  <div class="section">
+        let priceDisplay = `<span class="price">$${bestPrice.toFixed(2)}</span>`;
+        if (bestPrice === 0) {
+          priceDisplay = `<span class="price" style="color:#a0aec0;">No listings</span>`;
+        }
 
-    <h2>Current Listings</h2>
+        // Determine if best price is good/excellent
+        let badge = '';
+        if (bestPrice > 0 && bestPrice <= excellent) {
+          badge = '<span class="badge" style="background:#c6f6d5; color:#276749;">Excellent!</span>';
+        } else if (bestPrice > 0 && bestPrice <= target) {
+          badge = '<span class="badge" style="background:#fefcbf; color:#975a16;">Good deal</span>';
+        }
 
-    <div id="deals">
-      <p>Loading price data...</p>
-    </div>
+        const watchName = watch.name || 'Watch';
 
-  </div>
+        html += `
+          <div class="watch-card" data-watch="${watchId}">
+            <div class="watch-title">${watchName}</div>
+            <div class="watch-meta">MSRP: $${msrp}</div>
+            <div class="best-price">
+              ${priceDisplay}
+              <span class="source">${watch.best_source || ''}</span>
+              ${badge}
+            </div>
+            <div class="stats">
+              <span>Lowest: $${lowest.toFixed(2)}</span>
+              <span>Typical: $${typical.toFixed(2)}</span>
+            </div>
+            <div class="target-info">
+              Target: <span class="good">$${target}</span> &nbsp;|&nbsp; Excellent: <span class="excellent">$${excellent}</span>
+            </div>
+            ${isReconWatch ? `
+              <div class="toggle-bar">
+                <span style="font-size:0.9rem;">Show only Recon Solar:</span>
+                <button class="toggle-btn ${showOnlyRecon ? 'active' : ''}" data-watch="${watchId}">${showOnlyRecon ? 'ON' : 'OFF'}</button>
+              </div>
+            ` : ''}
+            <div class="listings-section">
+              ${filteredListings.length === 0 ? `<div class="empty">No matching listings found.</div>` : ''}
+              ${filteredListings.slice(0, 10).map(l => `
+                <div class="listing">
+                  <div class="info">
+                    <div class="title">${l.title || 'Listing'}</div>
+                    <span class="source-tag">${l.source || 'Unknown'}</span>
+                    ${l.condition ? ` <span class="source-tag">${l.condition}</span>` : ''}
+                  </div>
+                  <div>
+                    <span class="price">$${l.price.toFixed(2)}</span>
+                    ${l.link && l.link !== '#' ? ` <a href="${l.link}" target="_blank">View</a>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+              ${filteredListings.length > 10 ? `<div class="empty">... and ${filteredListings.length - 10} more</div>` : ''}
+            </div>
+          </div>
+        `;
+      }
 
-  <div class="section">
+      container.innerHTML = html;
 
-    <h2>Price History</h2>
-
-    <p style="color:#6b7280;">
-      Price history will appear here once the automatic tracker
-      begins collecting data.
-    </p>
-
-  </div>
-
-  <div class="updated">
-    Last updated: <span id="updated">Waiting for tracker...</span>
-  </div>
-
-</div>
-
-<script>
-
-async function loadPrices() {
-
-  try {
-
-    const response = await fetch("data.json?t=" + Date.now());
-
-    if (!response.ok) {
-      throw new Error("No price data yet");
-    }
-
-    const data = await response.json();
-
-    document.getElementById("bestPrice").textContent =
-      "$" + data.best_price;
-
-    document.getElementById("bestSource").textContent =
-      data.best_source;
-
-    document.getElementById("bestLink").href =
-      data.best_link;
-
-    document.getElementById("lowest").textContent =
-      "$" + data.lowest_price;
-
-    document.getElementById("typical").textContent =
-      "$" + data.typical_price;
-
-    document.getElementById("updated").textContent =
-      data.updated;
-
-    const deals = document.getElementById("deals");
-
-    deals.innerHTML = "";
-
-    data.listings.forEach(function(deal) {
-
-      const div = document.createElement("div");
-
-      div.className = "deal";
-
-      div.innerHTML = `
-        <div class="deal-top">
-          <div class="deal-source">${deal.source}</div>
-          <div class="deal-price">$${deal.price}</div>
-        </div>
-
-        <div class="deal-details">
-          ${deal.condition}
-        </div>
-
-        <a class="deal-link"
-           href="${deal.link}"
-           target="_blank">
-           View Listing →
-        </a>
-      `;
-
-      deals.appendChild(div);
-
-    });
-
-  }
-
-  catch (error) {
-
-    document.getElementById("deals").innerHTML = `
-      <p style="color:#6b7280;">
-        The automatic price tracker hasn't collected its first
-        update yet. We'll connect it next.
-      </p>
-    `;
-
-  }
-
-}
-
-loadPrices();
-
-</script>
-
+      // Toggle event listeners
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const watchId = this.dataset.watch;
+          const key = `toggle_${watchId}`;
+          const current = localStorage.getItem(key) === 'true';
+          const newVal = !current;
+          localStorage.setItem(key, newVal ? 'true' : 'false');
+          // Reload to apply filter
+          location.reload();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
