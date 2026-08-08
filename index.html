@@ -47,7 +47,6 @@
 
   <script>
     (async function() {
-      // Fetch both current data and history
       const [dataRes, historyRes] = await Promise.all([
         fetch('data.json'),
         fetch('history.json')
@@ -71,18 +70,18 @@
       let html = '';
       for (const [watchId, watch] of Object.entries(data.watches)) {
         const listings = watch.listings || [];
+        const filterTerms = watch.exact_filter_terms || [];
+
+        // Toggle state
         const toggleKey = `toggle_${watchId}`;
-        let showOnlyRecon = localStorage.getItem(toggleKey) === 'true';
+        let showOnlyExact = localStorage.getItem(toggleKey) === 'true';
 
-        // Determine if Recon Solar is a variant we care about
-        const isReconWatch = watch.name.toLowerCase().includes('recon');
-
-        // Filter listings if toggle is on
+        // Filter listings if toggle is ON and we have filter terms
         let filteredListings = listings;
-        if (showOnlyRecon && isReconWatch) {
+        if (showOnlyExact && filterTerms.length > 0) {
           filteredListings = listings.filter(l => {
             const title = l.title.toLowerCase();
-            return title.includes('recon') && title.includes('solar');
+            return filterTerms.every(term => title.includes(term));
           });
         }
 
@@ -93,8 +92,6 @@
         const msrp = watch.msrp || 349;
         const target = watch.target_price || 200;
         const excellent = watch.excellent_price || 180;
-
-        // Historical data
         const allTimeLow = watch.all_time_low || 0;
         const thirtyDayLow = watch.thirty_day_low || 0;
 
@@ -111,6 +108,18 @@
         }
 
         const watchName = watch.name || 'Watch';
+
+        // Build the toggle label if there are filter terms
+        let toggleHtml = '';
+        if (filterTerms.length > 0) {
+          const label = `Show exact model (${filterTerms.join(', ')})`;
+          toggleHtml = `
+            <div class="toggle-bar">
+              <span style="font-size:0.9rem;">${label}:</span>
+              <button class="toggle-btn ${showOnlyExact ? 'active' : ''}" data-watch="${watchId}">${showOnlyExact ? 'ON' : 'OFF'}</button>
+            </div>
+          `;
+        }
 
         html += `
           <div class="watch-card" data-watch="${watchId}">
@@ -130,12 +139,7 @@
             <div class="target-info">
               Target: <span class="good">$${target}</span> &nbsp;|&nbsp; Excellent: <span class="excellent">$${excellent}</span>
             </div>
-            ${isReconWatch ? `
-              <div class="toggle-bar">
-                <span style="font-size:0.9rem;">Show only Recon Solar:</span>
-                <button class="toggle-btn ${showOnlyRecon ? 'active' : ''}" data-watch="${watchId}">${showOnlyRecon ? 'ON' : 'OFF'}</button>
-              </div>
-            ` : ''}
+            ${toggleHtml}
             <div class="listings-section">
               ${filteredListings.length === 0 ? `<div class="empty">No matching listings found.</div>` : ''}
               ${filteredListings.slice(0, 10).map(l => `
