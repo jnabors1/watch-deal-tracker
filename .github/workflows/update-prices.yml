@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: update-watch-prices
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -17,6 +21,8 @@ jobs:
 
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -46,10 +52,9 @@ jobs:
 
           with open("data.json", "w") as f:
               json.dump(data, f, indent=2)
-
           PY
 
-      - name: Commit updated data
+      - name: Save updated data
         run: |
           git config user.name "Watch Deal Tracker"
           git config user.email "actions@github.com"
@@ -58,10 +63,26 @@ jobs:
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
-          else
-            git commit -m "Update watch price data"
-
-            git pull --rebase origin main
-
-            git push origin main
+            exit 0
           fi
+
+          git commit -m "Update watch price data"
+
+          for attempt in 1 2 3 4 5
+          do
+            echo "Push attempt $attempt..."
+
+            git fetch origin main
+            git rebase origin/main
+
+            if git push origin HEAD:main; then
+              echo "Push successful."
+              exit 0
+            fi
+
+            echo "Push failed. Retrying..."
+            sleep 5
+          done
+
+          echo "Unable to push after 5 attempts."
+          exit 1
