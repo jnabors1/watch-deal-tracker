@@ -1,13 +1,9 @@
 {
   "best_price": 0,
-  "best_source": "No listings found",
+  "best_source": "No matching listings found",
   "best_link": "#",
   "lowest_price": 0,
   "typical_price": 0,
   "updated": "2026-08-08 20:27 UTC",
-  "listings": [],
-  "sources": [
-    "WatchPatrol",
-    "eBay"
-  ]
+  "listings": []
 }
