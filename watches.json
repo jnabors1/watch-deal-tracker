@@ -1,0 +1,23 @@
+{
+  "watches": [
+    {
+      "id": "vaer_c5_recon_solar",
+      "name": "Vaer C5 Recon Field Solar 40mm",
+      "brand": "Vaer",
+      "model": "C5",
+      "required_terms": ["recon", "solar"],
+      "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
+      "msrp": 349,
+      "target_price": 200,
+      "excellent_price": 180,
+      "search_terms": [
+        "\"Vaer C5 Recon\"",
+        "\"Vaer C5 Field Solar\"",
+        "\"Vaer C5 Recon Solar\"",
+        "\"Vaer C5\"",
+        "\"C5 Recon\""
+      ],
+      "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/vaer/c5-field/"
+    }
+  ]
+}
