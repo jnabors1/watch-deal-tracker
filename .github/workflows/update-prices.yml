@@ -54,7 +54,8 @@ jobs:
           git config user.name "Watch Deal Tracker"
           git config user.email "actions@github.com"
 
-          git add data.json watchpatrol.json ebay_data.json
+          git add data.json watchpatrol.json || true
+          git add ebay_data.json 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit."
