@@ -6,10 +6,6 @@ import requests
 from bs4 import BeautifulSoup
 
 
-WATCHPATROL_URL = (
-    "https://www.watchpatrol.net/discover/brands/vaer/c5-field/"
-)
-
 HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -19,183 +15,123 @@ HEADERS = {
 }
 
 
-def is_exact_target(title):
+def is_exact_target(title, watch_config):
     """
-    Only accept listings that appear to be the
-    Vaer C5 Recon Field Solar.
-
-    We intentionally require 'recon' so that
-    C5 Tactical / C5 Field / C5 Navy listings
-    don't get mixed into the target watch.
+    Check if listing title matches the watch's required terms and excludes unwanted terms.
     """
+    title_lower = title.lower()
 
-    text = title.lower()
+    # Exclude terms
+    for term in watch_config.get("exclude_terms", []):
+        if term in title_lower:
+            return False
 
-    if "vaer" not in text:
+    # Must contain brand and model (if specified)
+    if watch_config.get("brand", "").lower() not in title_lower:
         return False
 
-    if not re.search(r"\bc5\b", text):
-        return False
+    if watch_config.get("model"):
+        if not re.search(rf"\b{re.escape(watch_config['model'])}\b", title_lower, re.IGNORECASE):
+            return False
 
-    if "recon" not in text:
-        return False
-
-    if "solar" not in text:
-        return False
+    # Must contain all required_terms
+    for term in watch_config.get("required_terms", []):
+        if term not in title_lower:
+            return False
 
     return True
 
 
 def extract_price(text):
-    """
-    Find the first dollar price in listing text.
-    """
-
-    match = re.search(
-        r"\$\s*([0-9,]+(?:\.[0-9]{1,2})?)",
-        text
-    )
-
+    match = re.search(r"\$\s*([0-9,]+(?:\.[0-9]{1,2})?)", text)
     if not match:
         return None
-
-    return float(
-        match.group(1).replace(",", "")
-    )
+    return float(match.group(1).replace(",", ""))
 
 
 def get_source(text):
-    """
-    Identify the marketplace/forum when possible.
-    """
-
     lower = text.lower()
-
     if "reddit" in lower:
         return "Reddit"
-
     if "watchuseek" in lower:
         return "WatchUSeek"
-
     if "rolexforums" in lower:
         return "Rolex Forums"
-
     if "klocksnack" in lower:
         return "Klocksnack"
-
     return "WatchPatrol"
 
 
-def fetch_listings():
+def fetch_listings_for_watch(watch_config):
+    url = watch_config.get("watchpatrol_url")
+    if not url:
+        return []
 
-    response = requests.get(
-        WATCHPATROL_URL,
-        headers=HEADERS,
-        timeout=30
-    )
-
+    response = requests.get(url, headers=HEADERS, timeout=30)
     response.raise_for_status()
-
-    soup = BeautifulSoup(
-        response.text,
-        "html.parser"
-    )
+    soup = BeautifulSoup(response.text, "html.parser")
 
     listings = []
     seen_urls = set()
 
-    # Look through links on the page.
     for link in soup.find_all("a", href=True):
-
-        title = link.get_text(
-            " ",
-            strip=True
-        )
-
+        title = link.get_text(" ", strip=True)
         if not title:
             continue
 
-        # We only care about listings containing
-        # the exact target model terms.
-        if not is_exact_target(title):
+        if not is_exact_target(title, watch_config):
             continue
 
         price = extract_price(title)
-
         if price is None:
             continue
 
-        url = link["href"]
+        url_href = link["href"]
+        if url_href.startswith("/"):
+            url_href = "https://www.watchpatrol.net" + url_href
 
-        if url.startswith("/"):
-            url = (
-                "https://www.watchpatrol.net"
-                + url
-            )
-
-        if url in seen_urls:
+        if url_href in seen_urls:
             continue
-
-        seen_urls.add(url)
+        seen_urls.add(url_href)
 
         listings.append({
             "source": get_source(title),
             "price": price,
             "condition": "Used / forum listing",
             "title": title,
-            "link": url
+            "link": url_href
         })
 
     return listings
 
 
-def save_data(listings):
+def main():
+    # Load watch configuration
+    with open("watches.json", "r", encoding="utf-8") as f:
+        config = json.load(f)
 
-    listings.sort(
-        key=lambda item: item["price"]
-    )
+    all_watch_data = {}
 
+    for watch in config["watches"]:
+        print(f"Checking WatchPatrol for {watch['name']}...")
+        listings = fetch_listings_for_watch(watch)
+        all_watch_data[watch["id"]] = {
+            "name": watch["name"],
+            "listings": listings,
+        }
+        print(f"  Found {len(listings)} exact-target listings.")
+
+    # Save per-watch WatchPatrol data
     output = {
         "source": "WatchPatrol",
-        "target": "Vaer C5 Recon Field Solar 40mm",
-        "updated": datetime.now(
-            timezone.utc
-        ).strftime("%Y-%m-%d %H:%M UTC"),
-        "listings": listings
+        "updated": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        "watches": all_watch_data,
     }
 
-    with open(
-        "watchpatrol.json",
-        "w",
-        encoding="utf-8"
-    ) as file:
+    with open("watchpatrol.json", "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=2)
 
-        json.dump(
-            output,
-            file,
-            indent=2
-        )
-
-    print(
-        f"Found {len(listings)} exact-target listings."
-    )
-
-
-def main():
-
-    print("Checking WatchPatrol...")
-
-    listings = fetch_listings()
-
-    save_data(listings)
-
-    for listing in listings:
-
-        print(
-            f"${listing['price']:.2f} "
-            f"- {listing['source']} - "
-            f"{listing['title']}"
-        )
+    print("WatchPatrol data saved.")
 
 
 if __name__ == "__main__":
