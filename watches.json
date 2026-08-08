@@ -18,6 +18,25 @@
         "\"C5 Recon\""
       ],
       "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/vaer/c5-field/"
+    },
+    {
+      "id": "hamilton_khaki_field_auto_38",
+      "name": "Hamilton Khaki Field Auto Automatic 38mm H70455533",
+      "brand": "Hamilton",
+      "model": "H70455533",
+      "required_terms": ["khaki", "field", "auto"],
+      "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
+      "msrp": 795,
+      "target_price": 500,
+      "excellent_price": 400,
+      "search_terms": [
+        "\"Hamilton Khaki Field Auto\"",
+        "\"Khaki Field Auto\"",
+        "\"H70455533\"",
+        "\"Hamilton Khaki Field Automatic\"",
+        "\"Hamilton Khaki Field Auto 38mm\""
+      ],
+      "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/hamilton/khaki-field-auto/"
     }
   ]
 }
