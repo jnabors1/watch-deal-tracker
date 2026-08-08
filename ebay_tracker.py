@@ -19,11 +19,17 @@ SEARCH_URL = "https://api.ebay.com/buy/browse/v1/item_summary/search"
 
 MARKETPLACE_ID = "EBAY_US"
 
-# Searches designed specifically for the Vaer C5 Recon Field Solar.
+# Set to True to require "Recon" in the title (tighter filtering)
+STRICT_MODE = False   # Change to True later if you want to restrict to Recon only
+
+# Broader searches to catch more listings
 SEARCHES = [
+    '"Vaer C5"',
     '"Vaer C5 Recon"',
-    '"Vaer C5 Field Solar"',
+    '"Vaer C5 Field"',
+    '"Vaer C5 Solar"',
     '"Vaer C5 Recon Solar"',
+    '"C5 Recon"',
 ]
 
 # We don't want accessories, straps, parts, etc.
@@ -97,13 +103,13 @@ def is_valid_listing(item):
     if not re.search(r"\bc5\b", title):
         return False
 
-    # Must look like a Recon / Field / Solar model.
-    valid_model_terms = [
-        "recon",
-        "field",
-        "solar",
-    ]
+    # If STRICT_MODE is True, require "Recon"
+    if STRICT_MODE:
+        if "recon" not in title:
+            return False
 
+    # Otherwise, require at least one of "recon", "field", "solar"
+    valid_model_terms = ["recon", "field", "solar"]
     if not any(term in title for term in valid_model_terms):
         return False
 
