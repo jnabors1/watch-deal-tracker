@@ -67,6 +67,8 @@ def fetch_listings_for_watch(watch_config):
     if not url:
         return []
 
+    print(f"  Fetching from: {url}")
+
     response = requests.get(url, headers=HEADERS, timeout=30)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
@@ -74,10 +76,16 @@ def fetch_listings_for_watch(watch_config):
     listings = []
     seen_urls = set()
 
+    # DEBUG: Print all titles found
+    print("  DEBUG: All titles found on the page:")
+
     for link in soup.find_all("a", href=True):
         title = link.get_text(" ", strip=True)
         if not title:
             continue
+
+        # Print every title for debugging
+        print(f"    - {title}")
 
         if not is_exact_target(title, watch_config):
             continue
