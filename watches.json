@@ -9,6 +9,7 @@
       "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
       "msrp": 349,
       "msrp_url": "https://www.vaerwatches.com/products/c5-recon-field-solar-40mm-usa",
+      "image_url": "https://www.vaerwatches.com/cdn/shop/files/C5-Recon-SP-RC-OLV.jpg?v=1768507967&width=800",
       "target_price": 200,
       "excellent_price": 180,
       "search_terms": [
@@ -30,6 +31,7 @@
       "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
       "msrp": 795,
       "msrp_url": "https://www.hamiltonwatch.com/en-us/h70455533-khaki-field-auto.html",
+      "image_url": "https://www.hamiltonwatch.com/media/catalog/product/cache/d24a34bded6d2df740ef66d66d2112c9/h/7/h70455533.png",
       "target_price": 575,
       "excellent_price": 450,
       "search_terms": [
