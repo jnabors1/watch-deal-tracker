@@ -11,8 +11,11 @@
     h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 4px; }
     .sub { color: #4a5568; font-size: 0.9rem; margin-bottom: 16px; }
     .watch-card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .watch-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .watch-header img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; background: #f7fafc; }
+    .watch-title-group { flex: 1; }
     .watch-title { font-size: 1.2rem; font-weight: 600; }
-    .watch-meta { font-size: 0.85rem; color: #4a5568; margin-bottom: 12px; }
+    .watch-meta { font-size: 0.85rem; color: #4a5568; }
     .watch-meta a { color: #2b6cb0; text-decoration: none; }
     .watch-meta a:hover { text-decoration: underline; }
     .best-price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
@@ -93,6 +96,7 @@
         const typical = watch.typical_price || 0;
         const msrp = watch.msrp || 349;
         const msrpUrl = watch.msrp_url || '#';
+        const imageUrl = watch.image_url || '';
         const target = watch.target_price || 200;
         const excellent = watch.excellent_price || 180;
         const allTimeLow = watch.all_time_low || 0;
@@ -124,10 +128,21 @@
           `;
         }
 
+        // Build image HTML
+        let imageHtml = '';
+        if (imageUrl) {
+          imageHtml = `<img src="${imageUrl}" alt="${watchName}" loading="lazy" />`;
+        }
+
         html += `
           <div class="watch-card" data-watch="${watchId}">
-            <div class="watch-title">${watchName}</div>
-            <div class="watch-meta">MSRP: <a href="${msrpUrl}" target="_blank" rel="noopener noreferrer">$${msrp}</a></div>
+            <div class="watch-header">
+              ${imageHtml}
+              <div class="watch-title-group">
+                <div class="watch-title">${watchName}</div>
+                <div class="watch-meta">MSRP: <a href="${msrpUrl}" target="_blank" rel="noopener noreferrer">$${msrp}</a></div>
+              </div>
+            </div>
             <div class="best-price">
               ${priceDisplay}
               <span class="source">${watch.best_source || ''}</span>
