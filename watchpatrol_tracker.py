@@ -17,8 +17,7 @@ HEADERS = {
 
 def is_exact_target(title, watch_config):
     """
-    Check if listing title matches the watch's required terms.
-    Model (reference number) is optional – helps but doesn't block.
+    Check if listing title matches the watch's required terms and excludes unwanted terms.
     """
     title_lower = title.lower()
 
@@ -35,11 +34,6 @@ def is_exact_target(title, watch_config):
     for term in watch_config.get("required_terms", []):
         if term not in title_lower:
             return False
-
-    # Model (reference number) is optional – if it exists, it helps,
-    # but we don't reject listings without it.
-    # Many sellers don't include the reference number in the title.
-    # We'll still check it if present, but it won't block the listing.
 
     return True
 
@@ -78,16 +72,10 @@ def fetch_listings_for_watch(watch_config):
     listings = []
     seen_urls = set()
 
-    # DEBUG: Print all titles found
-    print("  DEBUG: All titles found on the page:")
-
     for link in soup.find_all("a", href=True):
         title = link.get_text(" ", strip=True)
         if not title:
             continue
-
-        # Print every title for debugging
-        print(f"    - {title}")
 
         if not is_exact_target(title, watch_config):
             continue
