@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09 01:00 UTC",
+  "updated": "2026-08-09 01:07 UTC",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -21,7 +21,8 @@
       "sources": [],
       "exact_filter_terms": [
         "recon",
-        "solar"
+        "solar",
+        "40mm"
       ]
     },
     "hamilton_khaki_field_auto_38": {
@@ -99,8 +100,7 @@
         "WatchMaxx"
       ],
       "exact_filter_terms": [
-        "38mm",
-        "auto"
+        "H70455533"
       ]
     }
   }
