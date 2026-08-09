@@ -5,86 +5,270 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Watch Deal Tracker</title>
   <style>
+    /* --- CSS Variables (Light mode default) --- */
+    :root {
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #718096;
+      --border-color: #e2e8f0;
+      --tag-bg: #edf2f7;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --btn-primary: #2b6cb0;
+      --btn-primary-hover: #1a4e7a;
+      --deal-excellent: #276749;
+      --deal-good: #975a16;
+      --deal-fair: #d69e2e;
+      --deal-above: #c05621;
+      --deal-wait: #e53e3e;
+      --deal-nodeal: #718096;
+      --savings-green: #38a169;
+      --badge-excellent-bg: #c6f6d5;
+      --badge-excellent-text: #276749;
+      --badge-good-bg: #fefcbf;
+      --badge-good-text: #975a16;
+      --toggle-bg: #edf2f7;
+      --toggle-active: #2b6cb0;
+      --toggle-active-text: #ffffff;
+      --delimiter-color: #e2e8f0;
+    }
+
+    /* --- Dark mode variables --- */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a202c;
+        --card-bg: #2d3748;
+        --text-primary: #f7fafc;
+        --text-secondary: #a0aec0;
+        --text-muted: #a0aec0;
+        --border-color: #4a5568;
+        --tag-bg: #4a5568;
+        --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --btn-primary: #63b3ed;
+        --btn-primary-hover: #4299e1;
+        --toggle-bg: #4a5568;
+        --toggle-active: #63b3ed;
+        --toggle-active-text: #1a202c;
+        --delimiter-color: #4a5568;
+        --badge-excellent-bg: #22543d;
+        --badge-excellent-text: #9ae6b4;
+        --badge-good-bg: #744210;
+        --badge-good-text: #f6e05e;
+      }
+    }
+
+    /* --- Override for manual dark mode toggle --- */
+    body.dark-mode {
+      --bg: #1a202c;
+      --card-bg: #2d3748;
+      --text-primary: #f7fafc;
+      --text-secondary: #a0aec0;
+      --text-muted: #a0aec0;
+      --border-color: #4a5568;
+      --tag-bg: #4a5568;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --btn-primary: #63b3ed;
+      --btn-primary-hover: #4299e1;
+      --toggle-bg: #4a5568;
+      --toggle-active: #63b3ed;
+      --toggle-active-text: #1a202c;
+      --delimiter-color: #4a5568;
+      --badge-excellent-bg: #22543d;
+      --badge-excellent-text: #9ae6b4;
+      --badge-good-bg: #744210;
+      --badge-good-text: #f6e05e;
+    }
+
+    /* --- Light mode override (explicit) --- */
+    body.light-mode {
+      --bg: #f5f7fa;
+      --card-bg: #ffffff;
+      --text-primary: #1a202c;
+      --text-secondary: #4a5568;
+      --text-muted: #718096;
+      --border-color: #e2e8f0;
+      --tag-bg: #edf2f7;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --btn-primary: #2b6cb0;
+      --btn-primary-hover: #1a4e7a;
+      --toggle-bg: #edf2f7;
+      --toggle-active: #2b6cb0;
+      --toggle-active-text: #ffffff;
+      --delimiter-color: #e2e8f0;
+      --badge-excellent-bg: #c6f6d5;
+      --badge-excellent-text: #276749;
+      --badge-good-bg: #fefcbf;
+      --badge-good-text: #975a16;
+    }
+
+    /* --- General styles --- */
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f7fa; padding: 16px; color: #1a202c; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      padding: 16px;
+      color: var(--text-primary);
+      transition: background 0.2s, color 0.2s;
+    }
     .container { max-width: 600px; margin: 0 auto; }
 
+    /* --- Header with dark mode toggle --- */
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .app-header h1 { font-size: 1.5rem; font-weight: 600; }
+    .sub { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px; }
+    .dark-toggle {
+      background: var(--toggle-bg);
+      border: none;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: background 0.2s;
+    }
+    .dark-toggle:hover { opacity: 0.8; }
+
+    /* --- Watch card --- */
+    .watch-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    /* --- Delimiter between watches --- */
+    .watch-divider {
+      border: 0;
+      height: 1px;
+      background: var(--delimiter-color);
+      margin: 8px 0 24px 0;
+      opacity: 0.6;
+      transition: background 0.2s;
+    }
+
     .watch-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
-    .watch-header img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; background: #f7fafc; }
+    .watch-header img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color); background: var(--tag-bg); }
     .watch-title-group { flex: 1; }
     .watch-title { font-size: 1.2rem; font-weight: 600; }
-    .watch-sub { font-size: 0.85rem; color: #4a5568; }
-    .updated { font-size: 0.8rem; color: #718096; margin: 4px 0 12px 0; }
+    .watch-sub { font-size: 0.85rem; color: var(--text-secondary); }
+    .updated { font-size: 0.8rem; color: var(--text-muted); margin: 4px 0 12px 0; }
 
-    .deal-card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; }
+    .deal-card { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); text-align: center; }
     .deal-status { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-    .deal-status.excellent { color: #276749; }
-    .deal-status.good { color: #975a16; }
-    .deal-status.fair { color: #d69e2e; }
-    .deal-status.above { color: #c05621; }
-    .deal-status.wait { color: #e53e3e; }
-    .deal-status.nodeal { color: #718096; }
+    .deal-status.excellent { color: var(--deal-excellent); }
+    .deal-status.good { color: var(--deal-good); }
+    .deal-status.fair { color: var(--deal-fair); }
+    .deal-status.above { color: var(--deal-above); }
+    .deal-status.wait { color: var(--deal-wait); }
+    .deal-status.nodeal { color: var(--deal-nodeal); }
 
-    .deal-price { font-size: 2.8rem; font-weight: 700; color: #2b6cb0; line-height: 1.1; }
-    .deal-delivered { font-size: 0.9rem; color: #4a5568; margin-bottom: 8px; }
-    .deal-savings { font-size: 0.95rem; color: #38a169; margin-bottom: 8px; }
-    .deal-savings.negative { color: #e53e3e; }
-    .deal-source { font-size: 0.9rem; color: #4a5568; margin-bottom: 12px; }
+    .deal-price { font-size: 2.8rem; font-weight: 700; color: var(--btn-primary); line-height: 1.1; }
+    .deal-delivered { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; }
+    .deal-savings { font-size: 0.95rem; color: var(--savings-green); margin-bottom: 8px; }
+    .deal-savings.negative { color: var(--deal-wait); }
+    .deal-source { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; }
 
-    .btn-primary { display: inline-block; background: #2b6cb0; color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; }
-    .btn-primary:hover { background: #1a4e7a; }
+    .btn-primary { display: inline-block; background: var(--btn-primary); color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--btn-primary-hover); }
 
-    .thresholds-section { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .thresholds-section h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: #2d3748; }
-    .thresholds { display: flex; justify-content: center; gap: 24px; font-size: 0.95rem; color: #4a5568; }
-    .thresholds .excellent { color: #2b6cb0; font-weight: 600; }
-    .thresholds .target { color: #38a169; font-weight: 600; }
+    .thresholds-section { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); }
+    .thresholds-section h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
+    .thresholds { display: flex; justify-content: center; gap: 24px; font-size: 0.95rem; color: var(--text-secondary); }
+    .thresholds .excellent { color: var(--deal-excellent); font-weight: 600; }
+    .thresholds .target { color: var(--deal-good); font-weight: 600; }
 
-    .market-stats { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .market-stats h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: #2d3748; }
+    .market-stats { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); }
+    .market-stats h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text-secondary); }
     .stat-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.95rem; }
-    .stat-row .label { color: #4a5568; }
+    .stat-row .label { color: var(--text-secondary); }
     .stat-row .value { font-weight: 500; }
 
-    .official-section { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .official-section h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
-    .official-price { font-size: 1.2rem; font-weight: 700; color: #4a5568; }
-    .official-link { color: #2b6cb0; text-decoration: none; font-weight: 500; }
+    .official-section { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); }
+    .official-section h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; color: var(--text-secondary); }
+    .official-price { font-size: 1.2rem; font-weight: 700; color: var(--text-secondary); }
+    .official-link { color: var(--btn-primary); text-decoration: none; font-weight: 500; }
     .official-link:hover { text-decoration: underline; }
 
-    .listings-section { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .listing { border-top: 1px solid #e2e8f0; padding: 12px 0; display: flex; flex-direction: column; gap: 4px; }
+    .listings-section { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow); }
+    .listing { border-top: 1px solid var(--border-color); padding: 12px 0; display: flex; flex-direction: column; gap: 4px; }
     .listing:first-child { border-top: none; padding-top: 0; }
     .listing .top-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
     .listing .title { font-size: 0.95rem; flex: 1; margin-right: 8px; }
-    .listing .price { font-weight: 700; font-size: 1.1rem; color: #2b6cb0; white-space: nowrap; }
-    .listing .meta { font-size: 0.8rem; color: #4a5568; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .listing .meta .tag { background: #edf2f7; padding: 2px 8px; border-radius: 12px; }
-    .listing .meta .savings { color: #38a169; font-weight: 500; }
-    .listing .meta .savings.negative { color: #e53e3e; }
-    .listing .view-link { font-size: 0.9rem; color: #2b6cb0; text-decoration: none; font-weight: 500; }
+    .listing .price { font-weight: 700; font-size: 1.1rem; color: var(--btn-primary); white-space: nowrap; }
+    .listing .meta { font-size: 0.8rem; color: var(--text-secondary); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .listing .meta .tag { background: var(--tag-bg); padding: 2px 8px; border-radius: 12px; }
+    .listing .meta .savings { color: var(--savings-green); font-weight: 500; }
+    .listing .meta .savings.negative { color: var(--deal-wait); }
+    .listing .view-link { font-size: 0.9rem; color: var(--btn-primary); text-decoration: none; font-weight: 500; }
     .listing .view-link:hover { text-decoration: underline; }
 
-    .no-listings { color: #718096; font-style: italic; padding: 8px 0; }
+    .no-listings { color: var(--text-muted); font-style: italic; padding: 8px 0; }
 
     .toggle-bar { display: flex; align-items: center; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
-    .toggle-btn { background: #edf2f7; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; }
-    .toggle-btn.active { background: #2b6cb0; color: white; }
+    .toggle-btn { background: var(--toggle-bg); border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; color: var(--text-primary); transition: background 0.2s, color 0.2s; }
+    .toggle-btn.active { background: var(--toggle-active); color: var(--toggle-active-text); }
 
-    .related-note { font-size: 0.85rem; color: #718096; margin: 4px 0 8px 0; font-style: italic; }
+    .related-note { font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 8px 0; font-style: italic; }
 
     @media (max-width: 400px) {
       .deal-price { font-size: 2.2rem; }
       .thresholds { flex-direction: column; align-items: center; gap: 4px; }
+      .app-header h1 { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Header with dark mode toggle -->
+    <div class="app-header">
+      <h1>🔍 Watch Deal Tracker</h1>
+      <button class="dark-toggle" id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
+    </div>
+    <p class="sub">Automatic price monitoring for your target watches</p>
     <div id="content"></div>
   </div>
 
   <script>
+    // --- Dark mode logic ---
+    (function() {
+      const toggle = document.getElementById('darkModeToggle');
+      const stored = localStorage.getItem('darkMode');
+
+      // Determine initial mode
+      let isDark;
+      if (stored === 'true') isDark = true;
+      else if (stored === 'false') isDark = false;
+      else isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      function applyMode(dark) {
+        document.body.classList.remove('dark-mode', 'light-mode');
+        if (dark) {
+          document.body.classList.add('dark-mode');
+          toggle.textContent = '☀️';
+        } else {
+          document.body.classList.add('light-mode');
+          toggle.textContent = '🌙';
+        }
+        localStorage.setItem('darkMode', dark ? 'true' : 'false');
+        isDark = dark;
+      }
+
+      applyMode(isDark);
+
+      toggle.addEventListener('click', function() {
+        applyMode(!isDark);
+      });
+    })();
+
+    // --- Main dashboard logic ---
     (async function() {
       const [dataRes, historyRes] = await Promise.all([
         fetch('data.json'),
@@ -124,7 +308,16 @@
       }
 
       let html = '';
+      const watchIds = Object.keys(data.watches);
+      let watchIndex = 0;
+
       for (const [watchId, watch] of Object.entries(data.watches)) {
+        // Add subtle delimiter between watches (not before the first)
+        if (watchIndex > 0) {
+          html += `<hr class="watch-divider" />`;
+        }
+        watchIndex++;
+
         const listings = watch.listings || [];
         const filterTerms = watch.exact_filter_terms || [];
 
@@ -222,12 +415,11 @@
           }
           html += `<a href="${bestLink}" target="_blank" class="btn-primary">VIEW LISTING →</a>`;
         } else {
-          html += `<div class="deal-price" style="color:#a0aec0;">—</div>`;
+          html += `<div class="deal-price" style="color:var(--text-muted);">—</div>`;
           html += `<div class="deal-delivered">No qualifying listings</div>`;
         }
         html += `</div>`;
 
-        // --- YOUR PRICE TARGETS section (new label) ---
         html += `<div class="thresholds-section">`;
         html += `<h3>YOUR PRICE TARGETS</h3>`;
         html += `<div class="thresholds">
@@ -296,6 +488,7 @@
 
       container.innerHTML = html;
 
+      // Toggle event listeners
       document.querySelectorAll('.toggle-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const watchId = this.dataset.watch;
