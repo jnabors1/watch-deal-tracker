@@ -2,8 +2,10 @@ name: Update Watch Prices
 
 on:
   schedule:
-    - cron: "0 * * * *"      # At minute 0 of every hour
-    - cron: "30 * * * *"     # At minute 30 of every hour
+    - cron: "17 * * * *"
+      timezone: "America/Chicago"
+    - cron: "47 * * * *"
+      timezone: "America/Chicago"
 
   workflow_dispatch:
 
