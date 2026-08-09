@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-09 01:22 UTC",
+  "updated": "2026-08-09 01:34 UTC",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -17,8 +17,10 @@
       "lowest_price": 0,
       "median_price": 0,
       "listings": [],
-      "all_time_low": 0,
-      "thirty_day_low": 0,
+      "exact_all_time_low": 0,
+      "exact_thirty_day_low": 0,
+      "all_all_time_low": 0,
+      "all_thirty_day_low": 0,
       "sources": [],
       "exact_filter_terms": [
         "recon",
@@ -36,11 +38,11 @@
       "image_url": "https://www.hamiltonwatch.com/media/catalog/product/cache/d24a34bded6d2df740ef66d66d2112c9/h/7/h70455533.png",
       "target_price": 575,
       "excellent_price": 450,
-      "best_price": 450.0,
-      "best_source": "Reddit",
-      "best_link": "https://www.watchpatrol.net/listing/3574912/",
-      "lowest_price": 450.0,
-      "median_price": 650.0,
+      "best_price": 635.0,
+      "best_source": "eBay",
+      "best_link": "https://www.ebay.com/itm/137540949188?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item20061454c4:g:zc4AAOSwy11fqsUf",
+      "lowest_price": 635.0,
+      "median_price": 680.0,
       "listings": [
         {
           "source": "Reddit",
@@ -94,8 +96,10 @@
           "link": "https://www.watchmaxx.com/hamilton-watch-h70455553"
         }
       ],
-      "all_time_low": 450.0,
-      "thirty_day_low": 450.0,
+      "exact_all_time_low": 635.0,
+      "exact_thirty_day_low": 635.0,
+      "all_all_time_low": 450.0,
+      "all_thirty_day_low": 450.0,
       "sources": [
         "eBay",
         "WatchPatrol",
