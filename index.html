@@ -69,6 +69,8 @@
     .toggle-btn { background: #edf2f7; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; }
     .toggle-btn.active { background: #2b6cb0; color: white; }
 
+    .related-note { font-size: 0.85rem; color: #718096; margin: 4px 0 8px 0; font-style: italic; }
+
     @media (max-width: 400px) {
       .deal-price { font-size: 2.2rem; }
       .thresholds { flex-direction: column; align-items: center; gap: 4px; }
@@ -124,21 +126,21 @@
         const listings = watch.listings || [];
         const filterTerms = watch.exact_filter_terms || [];
 
-        // Default: exact-model filter ON (true)
+        // Default: exact-model filter OFF (false) for "Show related models"
         const toggleKey = `toggle_${watchId}`;
-        // If the toggle hasn't been set before, default to ON
-        let showOnlyExact = localStorage.getItem(toggleKey);
-        if (showOnlyExact === null) {
-          showOnlyExact = true; // default ON
+        let showRelated = localStorage.getItem(toggleKey);
+        if (showRelated === null) {
+          showRelated = false; // default: EXACT model only (related OFF)
         } else {
-          showOnlyExact = showOnlyExact === 'true';
+          showRelated = showRelated === 'true';
         }
 
+        // If showRelated is false, filter to exact terms
         let filteredListings = listings;
-        if (showOnlyExact && filterTerms.length > 0) {
+        if (!showRelated && filterTerms.length > 0) {
           filteredListings = listings.filter(l => {
             const title = l.title.toLowerCase();
-            return filterTerms.every(term => title.includes(term));
+            return filterTerms.every(term => title.toLowerCase().includes(term));
           });
         }
 
@@ -166,7 +168,7 @@
           const percent = (diff / officialPrice * 100).toFixed(0);
           if (diff > 0) {
             savingsText = `$${diff.toFixed(0)} below official`;
-            savingsPercent = `${percent}% off`;  // <-- changed from "below official"
+            savingsPercent = `${percent}% off`;
             savingsClass = '';
           } else if (diff < 0) {
             savingsText = `$${Math.abs(diff).toFixed(0)} above official`;
@@ -182,7 +184,6 @@
         const updatedStr = data.updated || '';
         const timeAgoStr = updatedStr ? timeAgo(updatedStr) : '';
 
-        // Build sub-title: "40mm • Solar" or "38mm • Automatic"
         const subParts = [];
         if (displaySize) subParts.push(displaySize);
         if (displayMovement) subParts.push(displayMovement);
@@ -226,7 +227,7 @@
         html += `<div class="stat-row"><span class="label">Best available</span><span class="value">$${bestPrice.toFixed(2)}</span></div>`;
         html += `<div class="stat-row"><span class="label">Median</span><span class="value">$${watch.median_price.toFixed(2)}</span></div>`;
         html += `<div class="stat-row"><span class="label">30-day low</span><span class="value">$${watch.thirty_day_low.toFixed(2)}</span></div>`;
-        html += `<div class="stat-row"><span class="label">All-time low</span><span class="value">$${watch.all_time_low.toFixed(2)}</span></div>`;
+        html += `<div class="stat-row"><span class="label">Lowest tracked</span><span class="value">$${watch.all_time_low.toFixed(2)}</span></div>`;
         html += `</div>`;
 
         html += `<div class="official-section">`;
@@ -235,13 +236,16 @@
         html += `<a href="${officialUrl}" target="_blank" class="official-link">View Official Vaer →</a>`;
         html += `</div>`;
 
-        // --- Toggle: now labeled "Show related models" and OFF by default since exact is ON
+        // --- Toggle: "Show related models" - OFF by default
         if (filterTerms.length > 0) {
           const label = `Show related models (${filterTerms.join(', ')})`;
           html += `<div class="toggle-bar">
             <span style="font-size:0.9rem;">${label}:</span>
-            <button class="toggle-btn ${!showOnlyExact ? 'active' : ''}" data-watch="${watchId}">${!showOnlyExact ? 'ON' : 'OFF'}</button>
+            <button class="toggle-btn ${showRelated ? 'active' : ''}" data-watch="${watchId}">${showRelated ? 'ON' : 'OFF'}</button>
           </div>`;
+          if (!showRelated && filteredListings.length < listings.length) {
+            html += `<div class="related-note">Showing only exact model listings. Turn ON to see related models.</div>`;
+          }
         }
 
         html += `<div class="listings-section">`;
@@ -281,8 +285,7 @@
           const watchId = this.dataset.watch;
           const key = `toggle_${watchId}`;
           const current = localStorage.getItem(key);
-          // If current is null, default to true (ON for exact). Toggle to false.
-          const newVal = current === null ? false : !(current === 'true');
+          const newVal = current === null ? true : !(current === 'true');
           localStorage.setItem(key, newVal ? 'true' : 'false');
           location.reload();
         });
