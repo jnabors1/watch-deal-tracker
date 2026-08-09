@@ -290,7 +290,7 @@
 
       function timeAgo(utcStr) {
         const now = new Date();
-        const then = new Date(utcStr + ' UTC');
+        const then = new Date(utcStr);
         const diff = Math.floor((now - then) / 1000);
         if (diff < 60) return diff + ' seconds ago';
         if (diff < 3600) return Math.floor(diff / 60) + ' minutes ago';
