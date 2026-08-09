@@ -1,9 +1,10 @@
 {
-  "updated": "2026-08-08 22:32 UTC",
+  "updated": "2026-08-09 00:07 UTC",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
       "msrp": 349,
+      "msrp_url": "https://www.vaerwatches.com/products/c5-recon-field-solar-40mm",
       "target_price": 200,
       "excellent_price": 180,
       "best_price": 0,
@@ -23,6 +24,7 @@
     "hamilton_khaki_field_auto_38": {
       "name": "Hamilton Khaki Field Auto Automatic 38mm H70455533",
       "msrp": 795,
+      "msrp_url": "https://www.hamiltonwatch.com/en-us/h70455533-khaki-field-auto.html",
       "target_price": 575,
       "excellent_price": 450,
       "best_price": 450.0,
@@ -83,8 +85,8 @@
           "link": "https://www.watchmaxx.com/hamilton-watch-h70455553"
         }
       ],
-      "all_time_low": 320.0,
-      "thirty_day_low": 320.0,
+      "all_time_low": 450.0,
+      "thirty_day_low": 450.0,
       "sources": [
         "eBay",
         "WatchPatrol",
