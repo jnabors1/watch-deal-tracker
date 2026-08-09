@@ -47,28 +47,23 @@ def main():
     for watch_id, watch_meta in watch_configs.items():
         all_listings = []
 
-        # eBay
         if watch_id in ebay_data:
             all_listings.extend(ebay_data[watch_id].get("listings", []))
 
-        # WatchPatrol
         if wp_data and "watches" in wp_data and watch_id in wp_data["watches"]:
             all_listings.extend(wp_data["watches"][watch_id].get("listings", []))
 
-        # WatchMaxx
         if watch_id in watchmaxx_data:
             all_listings.extend(watchmaxx_data[watch_id].get("listings", []))
 
-        # Sort by price
         all_listings.sort(key=lambda x: x.get("price", float("inf")))
 
-        # Calculate stats
         if all_listings:
             prices = [l["price"] for l in all_listings]
             best = all_listings[0]
             best_price = best["price"]
             lowest_price = min(prices)
-            median_price = compute_median(prices)          # <-- MEDIAN instead of average
+            median_price = compute_median(prices)
             best_source = best.get("source", "Unknown")
             best_link = best.get("link", "#")
             count = len(all_listings)
@@ -88,7 +83,7 @@ def main():
             "date": today,
             "best": best_price,
             "lowest": lowest_price,
-            "median": median_price,      # <-- store median in history
+            "median": median_price,
             "count": count
         })
 
@@ -99,7 +94,6 @@ def main():
             if entry["date"] >= cutoff_str
         ]
 
-        # Calculate historical stats
         all_time_low = None
         thirty_day_low = None
         thirty_days_ago = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d")
@@ -117,13 +111,13 @@ def main():
         if thirty_day_low is None:
             thirty_day_low = 0
 
-        # Official price (we treat msrp as official)
         official_price = watch_meta.get("msrp", 0)
         official_url = watch_meta.get("msrp_url", "#")
 
-        # Build the watch data
         merged_data[watch_id] = {
             "name": watch_meta["name"],
+            "display_size": watch_meta.get("display_size", ""),
+            "display_movement": watch_meta.get("display_movement", ""),
             "official_price": official_price,
             "official_url": official_url,
             "image_url": watch_meta.get("image_url", ""),
@@ -133,7 +127,7 @@ def main():
             "best_source": best_source,
             "best_link": best_link,
             "lowest_price": lowest_price,
-            "median_price": median_price,          # <-- median field
+            "median_price": median_price,
             "listings": all_listings,
             "all_time_low": all_time_low,
             "thirty_day_low": thirty_day_low,
@@ -141,7 +135,6 @@ def main():
             "exact_filter_terms": watch_meta.get("exact_filter_terms", [])
         }
 
-        # Sources
         sources = []
         if watch_id in ebay_data and ebay_data[watch_id].get("listings"):
             sources.append("eBay")
