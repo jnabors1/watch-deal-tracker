@@ -24,17 +24,12 @@
       --deal-wait: #e53e3e;
       --deal-nodeal: #718096;
       --savings-green: #38a169;
-      --badge-excellent-bg: #c6f6d5;
-      --badge-excellent-text: #276749;
-      --badge-good-bg: #fefcbf;
-      --badge-good-text: #975a16;
       --toggle-bg: #edf2f7;
       --toggle-active: #2b6cb0;
       --toggle-active-text: #ffffff;
       --delimiter-color: #e2e8f0;
     }
 
-    /* --- Dark mode variables --- */
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #1a202c;
@@ -51,14 +46,9 @@
         --toggle-active: #63b3ed;
         --toggle-active-text: #1a202c;
         --delimiter-color: #4a5568;
-        --badge-excellent-bg: #22543d;
-        --badge-excellent-text: #9ae6b4;
-        --badge-good-bg: #744210;
-        --badge-good-text: #f6e05e;
       }
     }
 
-    /* --- Override for manual dark mode toggle --- */
     body.dark-mode {
       --bg: #1a202c;
       --card-bg: #2d3748;
@@ -74,13 +64,8 @@
       --toggle-active: #63b3ed;
       --toggle-active-text: #1a202c;
       --delimiter-color: #4a5568;
-      --badge-excellent-bg: #22543d;
-      --badge-excellent-text: #9ae6b4;
-      --badge-good-bg: #744210;
-      --badge-good-text: #f6e05e;
     }
 
-    /* --- Light mode override (explicit) --- */
     body.light-mode {
       --bg: #f5f7fa;
       --card-bg: #ffffff;
@@ -96,13 +81,8 @@
       --toggle-active: #2b6cb0;
       --toggle-active-text: #ffffff;
       --delimiter-color: #e2e8f0;
-      --badge-excellent-bg: #c6f6d5;
-      --badge-excellent-text: #276749;
-      --badge-good-bg: #fefcbf;
-      --badge-good-text: #975a16;
     }
 
-    /* --- General styles --- */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -113,7 +93,6 @@
     }
     .container { max-width: 600px; margin: 0 auto; }
 
-    /* --- Header with dark mode toggle --- */
     .app-header {
       display: flex;
       justify-content: space-between;
@@ -134,7 +113,6 @@
     }
     .dark-toggle:hover { opacity: 0.8; }
 
-    /* --- Watch card --- */
     .watch-card {
       background: var(--card-bg);
       border-radius: 12px;
@@ -144,7 +122,6 @@
       transition: background 0.2s, box-shadow 0.2s;
     }
 
-    /* --- Delimiter between watches --- */
     .watch-divider {
       border: 0;
       height: 1px;
@@ -227,7 +204,6 @@
 </head>
 <body>
   <div class="container">
-    <!-- Header with dark mode toggle -->
     <div class="app-header">
       <h1>🔍 Watch Deal Tracker</h1>
       <button class="dark-toggle" id="darkModeToggle" aria-label="Toggle dark mode">🌙</button>
@@ -242,7 +218,6 @@
       const toggle = document.getElementById('darkModeToggle');
       const stored = localStorage.getItem('darkMode');
 
-      // Determine initial mode
       let isDark;
       if (stored === 'true') isDark = true;
       else if (stored === 'false') isDark = false;
@@ -288,6 +263,7 @@
         return;
       }
 
+      // --- FIXED: timeAgo function (no string manipulation) ---
       function timeAgo(utcStr) {
         const now = new Date();
         const then = new Date(utcStr);
@@ -312,7 +288,6 @@
       let watchIndex = 0;
 
       for (const [watchId, watch] of Object.entries(data.watches)) {
-        // Add subtle delimiter between watches (not before the first)
         if (watchIndex > 0) {
           html += `<hr class="watch-divider" />`;
         }
@@ -342,7 +317,6 @@
         const bestSource = bestListing ? bestListing.source : 'No listings';
         const bestLink = bestListing ? bestListing.link : '#';
         const bestCondition = bestListing ? bestListing.condition : '';
-        const bestTitle = bestListing ? bestListing.title : '';
 
         const officialPrice = watch.official_price || 0;
         const officialUrl = watch.official_url || '#';
@@ -488,7 +462,6 @@
 
       container.innerHTML = html;
 
-      // Toggle event listeners
       document.querySelectorAll('.toggle-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const watchId = this.dataset.watch;
