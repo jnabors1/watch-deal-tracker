@@ -116,6 +116,7 @@ def main():
 
         merged_data[watch_id] = {
             "name": watch_meta["name"],
+            "brand": watch_meta.get("brand", ""),  # <-- ADDED
             "display_size": watch_meta.get("display_size", ""),
             "display_movement": watch_meta.get("display_movement", ""),
             "official_price": official_price,
