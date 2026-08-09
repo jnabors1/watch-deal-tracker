@@ -2,8 +2,8 @@ name: Update Watch Prices
 
 on:
   schedule:
-    # Run every 30 minutes - updated 2026-08-08
-    - cron: "*/30 * * * *"
+    - cron: "0 * * * *"      # At minute 0 of every hour
+    - cron: "30 * * * *"     # At minute 30 of every hour
 
   workflow_dispatch:
 
