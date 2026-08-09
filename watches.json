@@ -7,7 +7,7 @@
       "model": "C5",
       "display_size": "40mm",
       "display_movement": "Solar",
-      "required_terms": ["recon", "solar"],
+      "required_terms": ["recon", "solar", "40mm"],
       "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
       "msrp": 349,
       "msrp_url": "https://www.vaerwatches.com/products/c5-recon-field-solar-40mm-usa",
@@ -22,7 +22,7 @@
         "\"C5 Recon\""
       ],
       "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/vaer/c5-field/",
-      "exact_filter_terms": ["recon", "solar"]
+      "exact_filter_terms": ["recon", "solar", "40mm"]
     },
     {
       "id": "hamilton_khaki_field_auto_38",
@@ -47,7 +47,7 @@
       ],
       "watchpatrol_url": "https://www.watchpatrol.net/discover/brands/hamilton/khaki-field-auto/",
       "watchmaxx_url": "https://www.watchmaxx.com/hamilton-watch-h70455553",
-      "exact_filter_terms": ["38mm", "auto"]
+      "exact_filter_terms": ["H70455533"]
     }
   ]
 }
