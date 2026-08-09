@@ -42,20 +42,13 @@ def is_exact_match(listing, filter_terms):
 
 
 def migrate_history_if_needed(history, watch_configs):
-    """
-    Convert old history format (list per watch) to new format
-    (dict with 'exact' and 'all' keys).
-    """
     for watch_id in watch_configs.keys():
         if watch_id in history:
-            # If it's a list, it's the old format
             if isinstance(history[watch_id], list):
-                # Convert to new format
                 history[watch_id] = {
                     "exact": history[watch_id],
-                    "all": history[watch_id][:]  # copy
+                    "all": history[watch_id][:]
                 }
-            # If it's already a dict but missing keys, add them
             elif isinstance(history[watch_id], dict):
                 if "exact" not in history[watch_id]:
                     history[watch_id]["exact"] = []
@@ -65,7 +58,6 @@ def migrate_history_if_needed(history, watch_configs):
 
 
 def main():
-    # Load watch configuration
     with open("watches.json", "r", encoding="utf-8") as f:
         watch_configs = {w["id"]: w for w in json.load(f)["watches"]}
 
@@ -74,8 +66,6 @@ def main():
     watchmaxx_data = load_json("watchmaxx_data.json") or {}
 
     history = load_history()
-
-    # --- Migrate old history format to new format ---
     history = migrate_history_if_needed(history, watch_configs)
 
     merged_data = {}
@@ -96,11 +86,8 @@ def main():
         all_listings.sort(key=lambda x: x.get("price", float("inf")))
 
         exact_terms = get_exact_filter_terms(watch_meta)
-
         exact_listings = [l for l in all_listings if is_exact_match(l, exact_terms)] if exact_terms else all_listings
-        related_listings = [l for l in all_listings if not is_exact_match(l, exact_terms)] if exact_terms else []
 
-        # --- Current stats (use exact listings) ---
         if exact_listings:
             prices = [l["price"] for l in exact_listings]
             best = exact_listings[0]
@@ -118,14 +105,9 @@ def main():
             best_link = "#"
             count = 0
 
-        # --- History – ensure watch_id exists with correct structure ---
         if watch_id not in history:
-            history[watch_id] = {
-                "exact": [],
-                "all": []
-            }
+            history[watch_id] = {"exact": [], "all": []}
 
-        # Append exact history
         history[watch_id]["exact"].append({
             "date": today,
             "best": best_price,
@@ -134,7 +116,6 @@ def main():
             "count": count
         })
 
-        # Append all history (for related view)
         if all_listings:
             all_prices = [l["price"] for l in all_listings]
             all_best = all_listings[0]
@@ -156,7 +137,6 @@ def main():
             "count": all_count
         })
 
-        # --- Trim history to 365 days ---
         cutoff = datetime.now(timezone.utc) - timedelta(days=365)
         cutoff_str = cutoff.strftime("%Y-%m-%d")
         history[watch_id]["exact"] = [
@@ -168,7 +148,6 @@ def main():
             if entry["date"] >= cutoff_str
         ]
 
-        # --- Calculate historical stats for exact ---
         exact_all_time_low = None
         exact_thirty_day_low = None
         thirty_days_ago = (datetime.now(timezone.utc) - timedelta(days=30)).strftime("%Y-%m-%d")
@@ -186,7 +165,6 @@ def main():
         if exact_thirty_day_low is None:
             exact_thirty_day_low = 0
 
-        # --- Calculate historical stats for all (related view) ---
         all_all_time_low = None
         all_thirty_day_low = None
 
@@ -241,8 +219,9 @@ def main():
 
     save_history(history)
 
+    # --- FIX: Use ISO 8601 format (universally supported) ---
     output = {
-        "updated": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        "updated": datetime.now(timezone.utc).isoformat() + "Z",
         "watches": merged_data,
     }
 
