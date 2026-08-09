@@ -9,7 +9,6 @@
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f7fa; padding: 16px; color: #1a202c; }
     .container { max-width: 600px; margin: 0 auto; }
 
-    /* --- Watch header --- */
     .watch-header { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
     .watch-header img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid #e2e8f0; background: #f7fafc; }
     .watch-title-group { flex: 1; }
@@ -17,7 +16,6 @@
     .watch-sub { font-size: 0.85rem; color: #4a5568; }
     .updated { font-size: 0.8rem; color: #718096; margin: 4px 0 12px 0; }
 
-    /* --- Deal status card --- */
     .deal-card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); text-align: center; }
     .deal-status { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
     .deal-status.excellent { color: #276749; }
@@ -36,26 +34,22 @@
     .btn-primary { display: inline-block; background: #2b6cb0; color: white; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; }
     .btn-primary:hover { background: #1a4e7a; }
 
-    /* --- Thresholds --- */
     .thresholds { display: flex; justify-content: center; gap: 24px; font-size: 0.9rem; color: #4a5568; margin: 8px 0 16px 0; }
     .thresholds .excellent { color: #2b6cb0; font-weight: 600; }
     .thresholds .target { color: #38a169; font-weight: 600; }
 
-    /* --- Market stats --- */
     .market-stats { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .market-stats h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: #2d3748; }
     .stat-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.95rem; }
     .stat-row .label { color: #4a5568; }
     .stat-row .value { font-weight: 500; }
 
-    /* --- Official Vaer section --- */
     .official-section { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .official-section h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
     .official-price { font-size: 1.2rem; font-weight: 700; color: #4a5568; }
     .official-link { color: #2b6cb0; text-decoration: none; font-weight: 500; }
     .official-link:hover { text-decoration: underline; }
 
-    /* --- Listings --- */
     .listings-section { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .listing { border-top: 1px solid #e2e8f0; padding: 12px 0; display: flex; flex-direction: column; gap: 4px; }
     .listing:first-child { border-top: none; padding-top: 0; }
@@ -69,15 +63,12 @@
     .listing .view-link { font-size: 0.9rem; color: #2b6cb0; text-decoration: none; font-weight: 500; }
     .listing .view-link:hover { text-decoration: underline; }
 
-    /* --- No listings --- */
     .no-listings { color: #718096; font-style: italic; padding: 8px 0; }
 
-    /* --- Toggle (exact model) --- */
     .toggle-bar { display: flex; align-items: center; gap: 12px; margin: 12px 0; flex-wrap: wrap; }
     .toggle-btn { background: #edf2f7; border: none; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; }
     .toggle-btn.active { background: #2b6cb0; color: white; }
 
-    /* --- Responsive --- */
     @media (max-width: 400px) {
       .deal-price { font-size: 2.2rem; }
       .thresholds { flex-direction: column; align-items: center; gap: 4px; }
@@ -109,7 +100,6 @@
         return;
       }
 
-      // Helper: time ago string
       function timeAgo(utcStr) {
         const now = new Date();
         const then = new Date(utcStr + ' UTC');
@@ -120,7 +110,6 @@
         return Math.floor(diff / 86400) + ' days ago';
       }
 
-      // Deal status logic
       function getDealStatus(bestPrice, target, excellent) {
         if (bestPrice === 0) return { status: 'nodeal', label: 'NO DEAL RIGHT NOW', color: 'nodeal' };
         if (bestPrice <= excellent) return { status: 'excellent', label: 'EXCELLENT DEAL', color: 'excellent' };
@@ -130,17 +119,21 @@
         return { status: 'wait', label: 'WAIT', color: 'wait' };
       }
 
-      // Render each watch
       let html = '';
       for (const [watchId, watch] of Object.entries(data.watches)) {
         const listings = watch.listings || [];
         const filterTerms = watch.exact_filter_terms || [];
 
-        // Toggle state
+        // Default: exact-model filter ON (true)
         const toggleKey = `toggle_${watchId}`;
-        let showOnlyExact = localStorage.getItem(toggleKey) === 'true';
+        // If the toggle hasn't been set before, default to ON
+        let showOnlyExact = localStorage.getItem(toggleKey);
+        if (showOnlyExact === null) {
+          showOnlyExact = true; // default ON
+        } else {
+          showOnlyExact = showOnlyExact === 'true';
+        }
 
-        // Filter listings if toggle ON
         let filteredListings = listings;
         if (showOnlyExact && filterTerms.length > 0) {
           filteredListings = listings.filter(l => {
@@ -149,7 +142,6 @@
           });
         }
 
-        // Best price from filtered listings
         const bestListing = filteredListings.length > 0 ? filteredListings[0] : null;
         const bestPrice = bestListing ? bestListing.price : 0;
         const bestSource = bestListing ? bestListing.source : 'No listings';
@@ -157,14 +149,15 @@
         const bestCondition = bestListing ? bestListing.condition : '';
         const bestTitle = bestListing ? bestListing.title : '';
 
-        // Official / targets
         const officialPrice = watch.official_price || 0;
         const officialUrl = watch.official_url || '#';
         const targetPrice = watch.target_price || 200;
         const excellentPrice = watch.excellent_price || 180;
         const imageUrl = watch.image_url || '';
+        const displaySize = watch.display_size || '';
+        const displayMovement = watch.display_movement || '';
+        const watchName = watch.name || 'Watch';
 
-        // Savings vs official
         let savingsText = '';
         let savingsPercent = '';
         let savingsClass = '';
@@ -173,11 +166,11 @@
           const percent = (diff / officialPrice * 100).toFixed(0);
           if (diff > 0) {
             savingsText = `$${diff.toFixed(0)} below official`;
-            savingsPercent = `${percent}% below official`;
+            savingsPercent = `${percent}% off`;  // <-- changed from "below official"
             savingsClass = '';
           } else if (diff < 0) {
             savingsText = `$${Math.abs(diff).toFixed(0)} above official`;
-            savingsPercent = `${Math.abs(percent)}% above official`;
+            savingsPercent = `${Math.abs(percent)}% above`;
             savingsClass = 'negative';
           } else {
             savingsText = 'At official price';
@@ -185,28 +178,28 @@
           }
         }
 
-        // Deal status
         const deal = getDealStatus(bestPrice, targetPrice, excellentPrice);
-
-        // Time ago
         const updatedStr = data.updated || '';
         const timeAgoStr = updatedStr ? timeAgo(updatedStr) : '';
 
-        // Build watch card
+        // Build sub-title: "40mm • Solar" or "38mm • Automatic"
+        const subParts = [];
+        if (displaySize) subParts.push(displaySize);
+        if (displayMovement) subParts.push(displayMovement);
+        const subText = subParts.join(' • ');
+
         html += `<div class="watch-card" data-watch="${watchId}">`;
 
-        // --- Header ---
         html += `<div class="watch-header">`;
         if (imageUrl) {
-          html += `<img src="${imageUrl}" alt="${watch.name}" loading="lazy" />`;
+          html += `<img src="${imageUrl}" alt="${watchName}" loading="lazy" />`;
         }
         html += `<div class="watch-title-group">
-          <div class="watch-title">${watch.name}</div>
-          <div class="watch-sub">40mm • Solar</div>
+          <div class="watch-title">${watchName}</div>
+          <div class="watch-sub">${subText}</div>
         </div></div>`;
         html += `<div class="updated">Updated ${timeAgoStr}</div>`;
 
-        // --- Deal status card ---
         html += `<div class="deal-card">`;
         html += `<div class="deal-status ${deal.color}">${deal.label}</div>`;
         if (bestPrice > 0) {
@@ -223,13 +216,11 @@
         }
         html += `</div>`;
 
-        // --- Thresholds ---
         html += `<div class="thresholds">
           <span>Excellent: <span class="excellent">$${excellentPrice}</span></span>
           <span>Target: <span class="target">$${targetPrice}</span></span>
         </div>`;
 
-        // --- Market stats ---
         html += `<div class="market-stats">`;
         html += `<h3>MARKET</h3>`;
         html += `<div class="stat-row"><span class="label">Best available</span><span class="value">$${bestPrice.toFixed(2)}</span></div>`;
@@ -238,23 +229,21 @@
         html += `<div class="stat-row"><span class="label">All-time low</span><span class="value">$${watch.all_time_low.toFixed(2)}</span></div>`;
         html += `</div>`;
 
-        // --- Official Vaer section ---
         html += `<div class="official-section">`;
         html += `<h3>OFFICIAL VAER</h3>`;
         html += `<div class="official-price">$${officialPrice}</div>`;
         html += `<a href="${officialUrl}" target="_blank" class="official-link">View Official Vaer →</a>`;
         html += `</div>`;
 
-        // --- Toggle (exact model) ---
+        // --- Toggle: now labeled "Show related models" and OFF by default since exact is ON
         if (filterTerms.length > 0) {
-          const label = `Show exact model (${filterTerms.join(', ')})`;
+          const label = `Show related models (${filterTerms.join(', ')})`;
           html += `<div class="toggle-bar">
             <span style="font-size:0.9rem;">${label}:</span>
-            <button class="toggle-btn ${showOnlyExact ? 'active' : ''}" data-watch="${watchId}">${showOnlyExact ? 'ON' : 'OFF'}</button>
+            <button class="toggle-btn ${!showOnlyExact ? 'active' : ''}" data-watch="${watchId}">${!showOnlyExact ? 'ON' : 'OFF'}</button>
           </div>`;
         }
 
-        // --- Listings ---
         html += `<div class="listings-section">`;
         if (filteredListings.length === 0) {
           html += `<div class="no-listings">No matching listings found.</div>`;
@@ -282,18 +271,18 @@
         }
         html += `</div>`;
 
-        html += `</div>`; // end watch-card
+        html += `</div>`;
       }
 
       container.innerHTML = html;
 
-      // Toggle event listeners
       document.querySelectorAll('.toggle-btn').forEach(btn => {
         btn.addEventListener('click', function() {
           const watchId = this.dataset.watch;
           const key = `toggle_${watchId}`;
-          const current = localStorage.getItem(key) === 'true';
-          const newVal = !current;
+          const current = localStorage.getItem(key);
+          // If current is null, default to true (ON for exact). Toggle to false.
+          const newVal = current === null ? false : !(current === 'true');
           localStorage.setItem(key, newVal ? 'true' : 'false');
           location.reload();
         });
