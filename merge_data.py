@@ -112,7 +112,8 @@ def main():
         merged_data[watch_id] = {
             "name": watch_meta["name"],
             "msrp": watch_meta.get("msrp"),
-            "msrp_url": watch_meta.get("msrp_url"),  # <-- NEW LINE
+            "msrp_url": watch_meta.get("msrp_url"),
+            "image_url": watch_meta.get("image_url"),  # <-- NEW LINE
             "target_price": watch_meta.get("target_price"),
             "excellent_price": watch_meta.get("excellent_price"),
             "best_price": best_price,
