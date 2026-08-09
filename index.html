@@ -161,6 +161,17 @@
         const watchName = watch.name || 'Watch';
         const brand = watch.brand || 'Official';
 
+        // --- Use the correct historical stats based on toggle state ---
+        // If showRelated is true, use "all" stats; otherwise use "exact" stats
+        let thirtyDayLow, allTimeLow;
+        if (showRelated) {
+          thirtyDayLow = watch.all_thirty_day_low || 0;
+          allTimeLow = watch.all_all_time_low || 0;
+        } else {
+          thirtyDayLow = watch.exact_thirty_day_low || 0;
+          allTimeLow = watch.exact_all_time_low || 0;
+        }
+
         let savingsText = '';
         let savingsPercent = '';
         let savingsClass = '';
@@ -227,8 +238,8 @@
         html += `<h3>MARKET</h3>`;
         html += `<div class="stat-row"><span class="label">Best available</span><span class="value">$${bestPrice.toFixed(2)}</span></div>`;
         html += `<div class="stat-row"><span class="label">Median</span><span class="value">$${watch.median_price.toFixed(2)}</span></div>`;
-        html += `<div class="stat-row"><span class="label">30-day low</span><span class="value">$${watch.thirty_day_low.toFixed(2)}</span></div>`;
-        html += `<div class="stat-row"><span class="label">Lowest tracked</span><span class="value">$${watch.all_time_low.toFixed(2)}</span></div>`;
+        html += `<div class="stat-row"><span class="label">30-day low</span><span class="value">$${thirtyDayLow.toFixed(2)}</span></div>`;
+        html += `<div class="stat-row"><span class="label">Lowest tracked</span><span class="value">$${allTimeLow.toFixed(2)}</span></div>`;
         html += `</div>`;
 
         // --- Official section with dynamic brand name ---
@@ -238,15 +249,18 @@
         html += `<a href="${officialUrl}" target="_blank" class="official-link">View Official ${brand} →</a>`;
         html += `</div>`;
 
-        // --- Toggle: "Show related models" - OFF by default
+        // --- Toggle: "Show related models" - OFF by default ---
         if (filterTerms.length > 0) {
-          const label = `Show related models (${filterTerms.join(', ')})`;
+          const label = `Show related models`;
           html += `<div class="toggle-bar">
             <span style="font-size:0.9rem;">${label}:</span>
             <button class="toggle-btn ${showRelated ? 'active' : ''}" data-watch="${watchId}">${showRelated ? 'ON' : 'OFF'}</button>
           </div>`;
           if (!showRelated && filteredListings.length < listings.length) {
-            html += `<div class="related-note">Showing only exact model listings. Turn ON to see related models.</div>`;
+            html += `<div class="related-note">Showing only exact model listings (${filterTerms.join(', ')}). Turn ON to see related models.</div>`;
+          }
+          if (showRelated && filteredListings.length === listings.length) {
+            html += `<div class="related-note">Showing all listings (including related models).</div>`;
           }
         }
 
