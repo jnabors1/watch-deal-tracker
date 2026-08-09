@@ -135,12 +135,13 @@
           showRelated = showRelated === 'true';
         }
 
-        // If showRelated is false, filter to exact terms
+        // If showRelated is false, filter to exact terms (case-insensitive)
         let filteredListings = listings;
         if (!showRelated && filterTerms.length > 0) {
           filteredListings = listings.filter(l => {
             const title = l.title.toLowerCase();
-            return filterTerms.every(term => title.toLowerCase().includes(term));
+            // Check if EVERY filter term appears in the title (case-insensitive)
+            return filterTerms.every(term => title.includes(term.toLowerCase()));
           });
         }
 
