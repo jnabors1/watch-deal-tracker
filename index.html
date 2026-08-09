@@ -140,7 +140,6 @@
         if (!showRelated && filterTerms.length > 0) {
           filteredListings = listings.filter(l => {
             const title = l.title.toLowerCase();
-            // Check if EVERY filter term appears in the title (case-insensitive)
             return filterTerms.every(term => title.includes(term.toLowerCase()));
           });
         }
@@ -160,6 +159,7 @@
         const displaySize = watch.display_size || '';
         const displayMovement = watch.display_movement || '';
         const watchName = watch.name || 'Watch';
+        const brand = watch.brand || 'Official';
 
         let savingsText = '';
         let savingsPercent = '';
@@ -231,10 +231,11 @@
         html += `<div class="stat-row"><span class="label">Lowest tracked</span><span class="value">$${watch.all_time_low.toFixed(2)}</span></div>`;
         html += `</div>`;
 
+        // --- Official section with dynamic brand name ---
         html += `<div class="official-section">`;
-        html += `<h3>OFFICIAL VAER</h3>`;
+        html += `<h3>OFFICIAL ${brand.toUpperCase()}</h3>`;
         html += `<div class="official-price">$${officialPrice}</div>`;
-        html += `<a href="${officialUrl}" target="_blank" class="official-link">View Official Vaer →</a>`;
+        html += `<a href="${officialUrl}" target="_blank" class="official-link">View Official ${brand} →</a>`;
         html += `</div>`;
 
         // --- Toggle: "Show related models" - OFF by default
