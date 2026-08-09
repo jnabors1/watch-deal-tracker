@@ -8,6 +8,7 @@
       "required_terms": ["recon", "solar"],
       "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
       "msrp": 349,
+      "msrp_url": "https://www.vaerwatches.com/products/c5-recon-field-solar-40mm",
       "target_price": 200,
       "excellent_price": 180,
       "search_terms": [
@@ -28,6 +29,7 @@
       "required_terms": ["khaki", "field", "auto", "38mm"],
       "exclude_terms": ["strap", "band", "bracelet", "replacement", "parts", "crystal", "spring bar", "buckle", "manual", "box only", "case only"],
       "msrp": 795,
+      "msrp_url": "https://www.hamiltonwatch.com/en-us/h70455533-khaki-field-auto.html",
       "target_price": 575,
       "excellent_price": 450,
       "search_terms": [
