@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, timezone, timedelta
+import statistics
 
 
 def load_json(filename):
@@ -21,6 +22,12 @@ def load_history():
 def save_history(history):
     with open("history.json", "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2)
+
+
+def compute_median(prices):
+    if not prices:
+        return 0
+    return round(statistics.median(prices), 2)
 
 
 def main():
@@ -55,19 +62,20 @@ def main():
         # Sort by price
         all_listings.sort(key=lambda x: x.get("price", float("inf")))
 
+        # Calculate stats
         if all_listings:
             prices = [l["price"] for l in all_listings]
             best = all_listings[0]
             best_price = best["price"]
             lowest_price = min(prices)
-            typical_price = round(sum(prices) / len(prices), 2)
+            median_price = compute_median(prices)          # <-- MEDIAN instead of average
             best_source = best.get("source", "Unknown")
             best_link = best.get("link", "#")
             count = len(all_listings)
         else:
             best_price = 0
             lowest_price = 0
-            typical_price = 0
+            median_price = 0
             best_source = "No listings found"
             best_link = "#"
             count = 0
@@ -80,7 +88,7 @@ def main():
             "date": today,
             "best": best_price,
             "lowest": lowest_price,
-            "typical": typical_price,
+            "median": median_price,      # <-- store median in history
             "count": count
         })
 
@@ -109,18 +117,23 @@ def main():
         if thirty_day_low is None:
             thirty_day_low = 0
 
+        # Official price (we treat msrp as official)
+        official_price = watch_meta.get("msrp", 0)
+        official_url = watch_meta.get("msrp_url", "#")
+
+        # Build the watch data
         merged_data[watch_id] = {
             "name": watch_meta["name"],
-            "msrp": watch_meta.get("msrp"),
-            "msrp_url": watch_meta.get("msrp_url"),
-            "image_url": watch_meta.get("image_url"),  # <-- NEW LINE
+            "official_price": official_price,
+            "official_url": official_url,
+            "image_url": watch_meta.get("image_url", ""),
             "target_price": watch_meta.get("target_price"),
             "excellent_price": watch_meta.get("excellent_price"),
             "best_price": best_price,
             "best_source": best_source,
             "best_link": best_link,
             "lowest_price": lowest_price,
-            "typical_price": typical_price,
+            "median_price": median_price,          # <-- median field
             "listings": all_listings,
             "all_time_low": all_time_low,
             "thirty_day_low": thirty_day_low,
@@ -128,6 +141,7 @@ def main():
             "exact_filter_terms": watch_meta.get("exact_filter_terms", [])
         }
 
+        # Sources
         sources = []
         if watch_id in ebay_data and ebay_data[watch_id].get("listings"):
             sources.append("eBay")
