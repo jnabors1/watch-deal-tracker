@@ -221,7 +221,7 @@ def main():
 
     # --- FIX: Use ISO 8601 format (universally supported) ---
     output = {
-        "updated": datetime.now(timezone.utc).isoformat() + "Z",
+        "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "watches": merged_data,
     }
 
