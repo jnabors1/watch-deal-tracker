@@ -1,8 +1,9 @@
 {
-  "updated": "2026-08-09 01:15 UTC",
+  "updated": "2026-08-09 01:22 UTC",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
+      "brand": "Vaer",
       "display_size": "40mm",
       "display_movement": "Solar",
       "official_price": 349,
@@ -27,6 +28,7 @@
     },
     "hamilton_khaki_field_auto_38": {
       "name": "Hamilton Khaki Field Auto Automatic 38mm H70455533",
+      "brand": "Hamilton",
       "display_size": "38mm",
       "display_movement": "Automatic",
       "official_price": 795,
