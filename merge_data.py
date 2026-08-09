@@ -112,6 +112,7 @@ def main():
         merged_data[watch_id] = {
             "name": watch_meta["name"],
             "msrp": watch_meta.get("msrp"),
+            "msrp_url": watch_meta.get("msrp_url"),  # <-- NEW LINE
             "target_price": watch_meta.get("target_price"),
             "excellent_price": watch_meta.get("excellent_price"),
             "best_price": best_price,
@@ -123,7 +124,6 @@ def main():
             "all_time_low": all_time_low,
             "thirty_day_low": thirty_day_low,
             "sources": [],
-            # --- NEW: Pass filter terms to the dashboard ---
             "exact_filter_terms": watch_meta.get("exact_filter_terms", [])
         }
 
