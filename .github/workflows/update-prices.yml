@@ -2,8 +2,8 @@ name: Update Watch Prices
 
 on:
   schedule:
-    - cron: "0 * * * *"      # At minute 0 of every hour
-    - cron: "30 * * * *"     # At minute 30 of every hour
+    - cron: "7 * * * *"      # At minute 7 of every hour
+    - cron: "37 * * * *"     # At minute 37 of every hour
 
   workflow_dispatch:
 
