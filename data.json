@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-11T20:03:13Z",
+  "updated": "2026-08-11T22:24:39Z",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -11,17 +11,28 @@
       "image_url": "https://www.vaerwatches.com/cdn/shop/files/C5-Recon-SP-RC-OLV.jpg?v=1768507967&width=800",
       "target_price": 200,
       "excellent_price": 180,
-      "best_price": 0,
-      "best_source": "No listings found",
-      "best_link": "#",
-      "lowest_price": 0,
-      "median_price": 0,
-      "listings": [],
-      "exact_all_time_low": 0,
-      "exact_thirty_day_low": 0,
-      "all_all_time_low": 0,
-      "all_thirty_day_low": 0,
-      "sources": [],
+      "best_price": 365.0,
+      "best_source": "eBay",
+      "best_link": "https://www.ebay.com/itm/257674913278?_skw=%22C5+Recon%22&hash=item3bfe9f25fe:g:~7UAAeSwBXxqe4E1",
+      "lowest_price": 365.0,
+      "median_price": 365.0,
+      "listings": [
+        {
+          "source": "eBay",
+          "price": 365.0,
+          "condition": "New with box and papers",
+          "title": "Vaer C5 Recon Field Solar - 40mm USA",
+          "link": "https://www.ebay.com/itm/257674913278?_skw=%22C5+Recon%22&hash=item3bfe9f25fe:g:~7UAAeSwBXxqe4E1",
+          "item_id": "v1|257674913278|0"
+        }
+      ],
+      "exact_all_time_low": 365.0,
+      "exact_thirty_day_low": 365.0,
+      "all_all_time_low": 365.0,
+      "all_thirty_day_low": 365.0,
+      "sources": [
+        "eBay"
+      ],
       "exact_filter_terms": [
         "recon",
         "solar",
