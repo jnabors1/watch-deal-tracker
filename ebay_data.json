@@ -23,19 +23,19 @@
     "listings": [
       {
         "source": "eBay",
-        "price": 674.0,
-        "condition": "New with box and papers",
-        "title": "New Hamilton Khaki Field Auto 38MM Black Dial Leather Men's Watch H70455533",
-        "link": "https://www.ebay.com/itm/385491870572?_skw=%22Hamilton+Khaki+Field+Auto+38mm%22&hash=item59c11b236c:g:Bp8AAeSwTtFqhAsM",
-        "item_id": "v1|385491870572|0"
-      },
-      {
-        "source": "eBay",
         "price": 635.0,
         "condition": "New with box and papers",
         "title": "NEW HAMILTON KHAKI FIELD AUTOMATIC H-10 MOVEMENT BROWN LEATHER 38MM H70455533",
         "link": "https://www.ebay.com/itm/137540949188?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item20061454c4:g:zc4AAOSwy11fqsUf",
         "item_id": "v1|137540949188|0"
+      },
+      {
+        "source": "eBay",
+        "price": 674.0,
+        "condition": "New with box and papers",
+        "title": "New Hamilton Khaki Field Auto 38MM Black Dial Leather Men's Watch H70455533",
+        "link": "https://www.ebay.com/itm/385491870572?_skw=%22Hamilton+Khaki+Field+Auto+38mm%22&hash=item59c11b236c:g:Bp8AAeSwTtFqhAsM",
+        "item_id": "v1|385491870572|0"
       },
       {
         "source": "eBay",
