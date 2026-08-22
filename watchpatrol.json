@@ -1,6 +1,6 @@
 {
   "source": "WatchPatrol",
-  "updated": "2026-08-22 23:01 UTC",
+  "updated": "2026-08-22 23:48 UTC",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -11,31 +11,31 @@
       "listings": [
         {
           "source": "Reddit",
+          "price": 320.0,
+          "condition": "Used / forum listing",
+          "title": "Hamilton Hamilton Khaki Field Auto 38mm $320 Shipped $320 Reddit 6\u00a0hours ago",
+          "link": "https://www.watchpatrol.net/listing/3671479/"
+        },
+        {
+          "source": "Reddit",
           "price": 499.0,
           "condition": "Used / forum listing",
-          "title": "Hamilton Hamilton Khaki Field Auto 38mm Full Set w/ Extras $499 Reddit 1\u00a0day ago",
+          "title": "Hamilton Hamilton Khaki Field Auto 38mm Full Set w/ Extras $499 Reddit 2\u00a0days ago",
           "link": "https://www.watchpatrol.net/listing/3664763/"
         },
         {
           "source": "Reddit",
           "price": 525.0,
           "condition": "Used / forum listing",
-          "title": "Hamilton Hamilton Khaki Field Automatic 38mm H7045551 - $525 OBO $525 Reddit 1\u00a0day ago",
+          "title": "Hamilton Hamilton Khaki Field Automatic 38mm H7045551 - $525 OBO $525 Reddit 2\u00a0days ago",
           "link": "https://www.watchpatrol.net/listing/3663888/"
         },
         {
           "source": "Reddit",
           "price": 499.0,
           "condition": "Used / forum listing",
-          "title": "Hamilton Hamilton Khaki Field Automatic 38MM (Leather + NATO St\u2026 $499 Reddit 2\u00a0days ago",
+          "title": "Hamilton Hamilton Khaki Field Automatic 38MM (Leather + NATO St\u2026 $499 Reddit 3\u00a0days ago",
           "link": "https://www.watchpatrol.net/listing/3660306/"
-        },
-        {
-          "source": "Reddit",
-          "price": 525.0,
-          "condition": "Used / forum listing",
-          "title": "Hamilton Hamilton Khaki Field Auto 38mm Blue Dial 2025 $525 Reddit 3\u00a0days ago",
-          "link": "https://www.watchpatrol.net/listing/3657189/"
         }
       ]
     }
