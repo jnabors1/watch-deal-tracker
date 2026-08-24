@@ -14,6 +14,14 @@
     "listings": [
       {
         "source": "eBay",
+        "price": 480.0,
+        "condition": "Pre-owned - Excellent",
+        "title": "Hamilton Khaki Field Automatic 38mm Black Dial Date Men's Watch H70455533",
+        "link": "https://www.ebay.com/itm/278307971565?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item40cc72a1ed:g:Md4AAeSwe-pqjKST",
+        "item_id": "v1|278307971565|0"
+      },
+      {
+        "source": "eBay",
         "price": 635.0,
         "condition": "New with box and papers",
         "title": "NEW HAMILTON KHAKI FIELD AUTOMATIC H-10 MOVEMENT BROWN LEATHER 38MM H70455533",

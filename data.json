@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24T19:55:25Z",
+  "updated": "2026-08-24T21:14:50Z",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -38,11 +38,11 @@
       "image_url": "https://www.hamiltonwatch.com/media/catalog/product/cache/d24a34bded6d2df740ef66d66d2112c9/h/7/h70455533.png",
       "target_price": 575,
       "excellent_price": 450,
-      "best_price": 635.0,
+      "best_price": 480.0,
       "best_source": "eBay",
-      "best_link": "https://www.ebay.com/itm/137540949188?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item20061454c4:g:zc4AAOSwy11fqsUf",
-      "lowest_price": 635.0,
-      "median_price": 680.0,
+      "best_link": "https://www.ebay.com/itm/278307971565?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item40cc72a1ed:g:Md4AAeSwe-pqjKST",
+      "lowest_price": 480.0,
+      "median_price": 657.5,
       "listings": [
         {
           "source": "Reddit",
@@ -50,6 +50,14 @@
           "condition": "Used / forum listing",
           "title": "Hamilton Hamilton Khaki Field Auto 38mm $320 Shipped $320 Reddit 1\u00a0day ago",
           "link": "https://www.watchpatrol.net/listing/3671479/"
+        },
+        {
+          "source": "eBay",
+          "price": 480.0,
+          "condition": "Pre-owned - Excellent",
+          "title": "Hamilton Khaki Field Automatic 38mm Black Dial Date Men's Watch H70455533",
+          "link": "https://www.ebay.com/itm/278307971565?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item40cc72a1ed:g:Md4AAeSwe-pqjKST",
+          "item_id": "v1|278307971565|0"
         },
         {
           "source": "Reddit",
@@ -89,8 +97,8 @@
           "link": "https://www.watchmaxx.com/hamilton-watch-h70455553"
         }
       ],
-      "exact_all_time_low": 635.0,
-      "exact_thirty_day_low": 635.0,
+      "exact_all_time_low": 480.0,
+      "exact_thirty_day_low": 480.0,
       "all_all_time_low": 320.0,
       "all_thirty_day_low": 320.0,
       "sources": [
