@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-06T20:17:00Z",
+  "updated": "2026-09-06T20:41:59Z",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -44,13 +44,6 @@
       "lowest_price": 589.99,
       "median_price": 664.5,
       "listings": [
-        {
-          "source": "Reddit",
-          "price": 399.0,
-          "condition": "Used / forum listing",
-          "title": "Hamilton Hamilton Khaki Field Auto 38mm Full Set w/ Extras $399 Reddit 1\u00a0week ago",
-          "link": "https://www.watchpatrol.net/listing/3690822/"
-        },
         {
           "source": "Reddit",
           "price": 475.0,
