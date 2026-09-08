@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08T16:48:54Z",
+  "updated": "2026-09-08T18:30:52Z",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -45,19 +45,19 @@
       "median_price": 664.5,
       "listings": [
         {
-          "source": "Reddit",
-          "price": 475.0,
-          "condition": "Used / forum listing",
-          "title": "Hamilton Hamilton Khaki Field 38MM Automatic $475 Reddit 1\u00a0week ago",
-          "link": "https://www.watchpatrol.net/listing/3695702/"
-        },
-        {
           "source": "eBay",
           "price": 589.99,
           "condition": "Pre-owned - Excellent",
           "title": "Hamilton Khaki Field Automatic H70455533 38mm Swiss Watch With Box Papers",
           "link": "https://www.ebay.com/itm/407172022082?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=item5ecd57ff42:g:lroAAeSwbr9qjzzk",
           "item_id": "v1|407172022082|0"
+        },
+        {
+          "source": "Reddit",
+          "price": 600.0,
+          "condition": "Used / forum listing",
+          "title": "Hamilton 2025 Hamilton Khaki Field Auto 38mm $600 Reddit 1\u00a0hour ago",
+          "link": "https://www.watchpatrol.net/listing/3721134/"
         },
         {
           "source": "eBay",
