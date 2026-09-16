@@ -6762,6 +6762,13 @@
         "lowest": 0,
         "median": 0,
         "count": 0
+      },
+      {
+        "date": "2026-09-16",
+        "best": 0,
+        "lowest": 0,
+        "median": 0,
+        "count": 0
       }
     ],
     "all": [
@@ -13508,6 +13515,13 @@
       },
       {
         "date": "2026-09-15",
+        "best": 0,
+        "lowest": 0,
+        "median": 0,
+        "count": 0
+      },
+      {
+        "date": "2026-09-16",
         "best": 0,
         "lowest": 0,
         "median": 0,
@@ -20292,6 +20306,13 @@
         "lowest": 589.99,
         "median": 680.0,
         "count": 3
+      },
+      {
+        "date": "2026-09-16",
+        "best": 589.99,
+        "lowest": 589.99,
+        "median": 680.0,
+        "count": 3
       }
     ],
     "all": [
@@ -27056,6 +27077,13 @@
         "lowest": 577.0,
         "median": 589.99,
         "count": 5
+      },
+      {
+        "date": "2026-09-16",
+        "best": 500.0,
+        "lowest": 500.0,
+        "median": 584.0,
+        "count": 6
       }
     ]
   }
