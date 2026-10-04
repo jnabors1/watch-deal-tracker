@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-03T23:44:24Z",
+  "updated": "2026-10-04T02:49:42Z",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -92,7 +92,7 @@
       "exact_all_time_low": 480.0,
       "exact_thirty_day_low": 589.99,
       "all_all_time_low": 320.0,
-      "all_thirty_day_low": 330.0,
+      "all_thirty_day_low": 399.0,
       "sources": [
         "eBay",
         "WatchPatrol",
