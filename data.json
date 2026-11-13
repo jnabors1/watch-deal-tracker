@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13T17:20:13Z",
+  "updated": "2026-11-13T21:53:57Z",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -42,7 +42,7 @@
       "best_source": "eBay",
       "best_link": "https://www.ebay.com/itm/820263872664?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=itembefb896898:g:TGUAAeSw2khq2TWG",
       "lowest_price": 385.0,
-      "median_price": 669.65,
+      "median_price": 651.83,
       "listings": [
         {
           "source": "eBay",
@@ -69,10 +69,18 @@
           "item_id": "v1|820311432875|0"
         },
         {
+          "source": "eBay",
+          "price": 385.0,
+          "condition": "Seller refurbished",
+          "title": "Hamilton Khaki Field Automatic 38mm H70455533 Men\u2019s Swiss Watch Black Colour",
+          "link": "https://www.ebay.com/itm/820350792606?_skw=%22Hamilton+Khaki+Field+Automatic%22&hash=itembf00b7b39e:g:yagAAeSwC6xq2Tt3",
+          "item_id": "v1|820350792606|0"
+        },
+        {
           "source": "Reddit",
           "price": 450.0,
           "condition": "Used / forum listing",
-          "title": "Hamilton Hamilton Khaki Field Auto 38mm H70455533 \u2013 Black Dial \u2026 $450 Reddit 6\u00a0days ago",
+          "title": "Hamilton Hamilton Khaki Field Auto 38mm H70455533 \u2013 Black Dial \u2026 $450 Reddit 1\u00a0week ago",
           "link": "https://www.watchpatrol.net/listing/3803667/"
         },
         {
