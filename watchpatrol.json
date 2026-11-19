@@ -1,6 +1,6 @@
 {
   "source": "WatchPatrol",
-  "updated": "2026-11-19 03:08 UTC",
+  "updated": "2026-11-19 12:02 UTC",
   "watches": {
     "vaer_c5_recon_solar": {
       "name": "Vaer C5 Recon Field Solar 40mm",
@@ -9,6 +9,13 @@
     "hamilton_khaki_field_auto_38": {
       "name": "Hamilton Khaki Field Auto Automatic 38mm H70455533",
       "listings": [
+        {
+          "source": "Reddit",
+          "price": 550.0,
+          "condition": "Used / forum listing",
+          "title": "Hamilton Hamilton Khaki Field automatic 38mm full set $550 Reddit 7\u00a0hours ago",
+          "link": "https://www.watchpatrol.net/listing/3820403/"
+        },
         {
           "source": "Reddit",
           "price": 400.0,
@@ -22,20 +29,6 @@
           "condition": "Used / forum listing",
           "title": "Hamilton Hamilton Khaki Field Auto 38mm H70455533 \u2013 Black Dial \u2026 $450 Reddit 1\u00a0week ago",
           "link": "https://www.watchpatrol.net/listing/3803667/"
-        },
-        {
-          "source": "Reddit",
-          "price": 500.0,
-          "condition": "Used / forum listing",
-          "title": "Hamilton Hamilton Khaki Field Auto 38mm Silver Dial + Uncle Sei\u2026 $500 Reddit 3\u00a0weeks ago",
-          "link": "https://www.watchpatrol.net/listing/3785164/"
-        },
-        {
-          "source": "Reddit",
-          "price": 650.0,
-          "condition": "Used / forum listing",
-          "title": "Hamilton [WTT][US] Hamilton Khaki Field Automatic 38mm H70455553 $650 Reddit 4\u00a0weeks ago",
-          "link": "https://www.watchpatrol.net/listing/3776217/"
         }
       ]
     }
